@@ -191,22 +191,26 @@ containing a value of this type.
         public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int blue=0x7f020003;
+        public static final int blue=0x7f020005;
         public static final int btnstyle=0x7f020000;
-        public static final int darkgray=0x7f020004;
-        public static final int ic_launcher=0x7f020001;
-        public static final int lightgray=0x7f020005;
-        public static final int lightred=0x7f020006;
-        public static final int logo=0x7f020002;
-        public static final int white=0x7f020007;
+        public static final int cover=0x7f020001;
+        public static final int darkgray=0x7f020006;
+        public static final int ic_launcher=0x7f020002;
+        public static final int lightgray=0x7f020007;
+        public static final int lightred=0x7f020008;
+        public static final int logo=0x7f020003;
+        public static final int title=0x7f020004;
+        public static final int white=0x7f020009;
     }
     public static final class id {
-        public static final int action_exit=0x7f09000b;
-        public static final int action_settings=0x7f09000a;
+        public static final int action_exit=0x7f09000d;
+        public static final int action_settings=0x7f09000c;
         public static final int button1=0x7f090006;
         public static final int button2=0x7f090007;
         public static final int chart_layout=0x7f090008;
         public static final int dashboardView1=0x7f090005;
+        public static final int imageView=0x7f09000a;
+        public static final int imageView2=0x7f09000b;
         public static final int inner=0x7f090000;
         public static final int normal=0x7f090001;
         public static final int outer=0x7f090002;

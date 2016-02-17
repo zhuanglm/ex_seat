@@ -98,7 +98,7 @@ public class DataGraph extends View{
         //canvas.drawLine(XPoint, 311, XPoint + 1000, 311, green_paint);                                                                  
         //画X轴 
         canvas.drawLine(XPoint, YPoint, XPoint + XLength, YPoint, paint); 
-        System.out.println("Data.size = " + DataDef.dataFromDev.size()); 
+        //System.out.println("Data.size = " + DataDef.dataFromDev.size());
         if(DataDef.dataFromDev.size() > 1){ 
             for(int i=1; i<DataDef.dataFromDev.size(); i++){ 
                 canvas.drawLine(XPoint + (i-1) * XScale, YPoint - (float)((DataDef.dataFromDev.get(i-1)*0.01-0.01) * YLength/YScaleRange),  
