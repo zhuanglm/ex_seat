@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/white"
+    android:background="#0e1a44"
     tools:context="com.example.ex_seat.MainActivity">
 
     <Button
@@ -15,14 +15,25 @@
         android:background="@drawable/btnstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="167dp"
         android:text="@string/button_name2"
         android:textColor="#ffffff"
         android:textSize="15sp"
-        android:height="37dp" />
-    
+        android:height="37dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Exercise every day!"
+        android:textColor="#ffffff"
+        android:id="@+id/title"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="28dp" />
+
 </RelativeLayout>
 
 <!-- From: file:/D:/ADT%20workspace/ex_seat/app/src/main/res/layout/activity_welcome.xml -->

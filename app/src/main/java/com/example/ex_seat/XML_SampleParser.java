@@ -17,8 +17,8 @@ public class XML_SampleParser implements XML_Parser {
 		List<XML_Node> items = null;  
 		XML_Node item = null;  
 	         
-		XmlPullParser parser = Xml.newPullParser(); //ÓÉandroid.util.Xml´´½¨Ò»¸öXmlPullParserÊµÀı  
-		parser.setInput(is, "UTF-8");               //ÉèÖÃÊäÈëÁ÷ ²¢Ö¸Ã÷±àÂë·½Ê½  
+		XmlPullParser parser = Xml.newPullParser(); //ç”±android.util.Xmlåˆ›å»ºä¸€ä¸ªXmlPullParserå®ä¾‹  
+		parser.setInput(is, "UTF-8");               //è®¾ç½®è¾“å…¥æµ å¹¶æŒ‡æ˜ç¼–ç æ–¹å¼  
 
 		int eventType = parser.getEventType();  
         while (eventType != XmlPullParser.END_DOCUMENT) {  
@@ -48,9 +48,9 @@ public class XML_SampleParser implements XML_Parser {
 
 	@Override
 	public String serialize(List<XML_Node> nodes) throws Exception {
-		XmlSerializer serializer = Xml.newSerializer(); //ÓÉandroid.util.Xml´´½¨Ò»¸öXmlSerializerÊµÀı  
+		XmlSerializer serializer = Xml.newSerializer(); //ç”±android.util.Xmlåˆ›å»ºä¸€ä¸ªXmlSerializerå®ä¾‹  
         StringWriter writer = new StringWriter();  
-        serializer.setOutput(writer);   //ÉèÖÃÊä³ö·½ÏòÎªwriter  
+        serializer.setOutput(writer);   //è®¾ç½®è¾“å‡ºæ–¹å‘ä¸ºwriter  
         serializer.startDocument("UTF-8", true);  
         serializer.startTag("", "Published");  
         for (XML_Node item : nodes) {  

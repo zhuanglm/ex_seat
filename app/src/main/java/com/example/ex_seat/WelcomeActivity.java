@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.app.ActionBar;
 
 public class WelcomeActivity extends Activity {
 	
@@ -15,6 +16,9 @@ public class WelcomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
+
+		ActionBar mActionBar=getActionBar();
+		mActionBar.hide();
 		
 		Button m_Startbtn = (Button)findViewById(R.id.button1);
 		m_Startbtn.setOnClickListener(new View.OnClickListener() {

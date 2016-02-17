@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface XML_Parser {
 	 /** 
-     * ½âÎöÊäÈëÁ÷ µÃµ½XML_Node¶ÔÏó¼¯ºÏ 
+     * è§£æè¾“å…¥æµ å¾—åˆ°XML_Nodeå¯¹è±¡é›†åˆ 
      * @param is 
      * @return 
      * @throws Exception 
@@ -13,7 +13,7 @@ public interface XML_Parser {
     public List<XML_Node> parse(InputStream is) throws Exception;  
       
     /** 
-     * ĞòÁĞ»¯XML_Node¶ÔÏó¼¯ºÏ µÃµ½XMLĞÎÊ½µÄ×Ö·û´® 
+     * åºåˆ—åŒ–XML_Nodeå¯¹è±¡é›†åˆ å¾—åˆ°XMLå½¢å¼çš„å­—ç¬¦ä¸² 
      * @param nodes 
      * @return 
      * @throws Exception 
