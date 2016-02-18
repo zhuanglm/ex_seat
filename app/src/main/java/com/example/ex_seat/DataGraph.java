@@ -8,7 +8,7 @@ import android.view.View;
                                                                  
 public class DataGraph extends View{ 
     private int XPoint = 60; 
-    private int YPoint = 380; 
+    private int YPoint ;
     private int XScale = 20;  //刻度长度 
     private int YScaleRange = 8;
     private int YScale ; 
@@ -62,6 +62,7 @@ public class DataGraph extends View{
         super.onDraw(canvas); 
          
         YLength = this.getHeight()-40;
+        YPoint = YLength+40;
         YScale = YLength/YScaleRange;
         XLength = this.getWidth();
         DataDef.MaxDataSize = XLength / XScale;
@@ -89,8 +90,10 @@ public class DataGraph extends View{
         //添加刻度和文字 
         for(int i=0; i * YScale < YLength; i++) { 
             float y = YPoint - i * YScale;
-        	if(i>0)
-            	canvas.drawLine(XPoint, y+1, XPoint + XLength, y+1, green_paint);  //刻度 
+        	if(i>0) {
+                canvas.drawLine(XPoint, y, XPoint + XLength, y, green_paint);  //刻度
+                canvas.drawLine(XPoint, y+1, XPoint + XLength, y+1, green_paint);
+            }
                                                                              
             canvas.drawText(YLabel[i], XPoint - 50, YPoint - i * YScale, paint);//文字 
         }

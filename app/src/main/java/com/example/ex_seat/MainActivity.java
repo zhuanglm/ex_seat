@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -162,6 +163,9 @@ public class MainActivity extends Activity {
 		Intent intent = this.getIntent();    //获得当前的Intent
  		Bundle bundle = intent.getExtras();  //获得全部数据
 		String value = bundle.getString("name");  //获得名为name的值
+
+		ActionBar actionBar=getActionBar();
+		actionBar.setDisplayShowTitleEnabled(false);
 		
 		/*DatabaseHelper database = new DatabaseHelper(this,DB_NAME,null,version);
 		SQLiteDatabase db = database.getReadableDatabase();
