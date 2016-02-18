@@ -63,3 +63,9 @@ activity#com.example.ex_seat.MainActivity
 ADDED from AndroidManifest.xml:28:9
 	android:name
 		ADDED from AndroidManifest.xml:28:19
+meta-data#com.google.android.gms.version
+ADDED from AndroidManifest.xml:31:9
+	android:value
+		ADDED from AndroidManifest.xml:33:13
+	android:name
+		ADDED from AndroidManifest.xml:32:13
