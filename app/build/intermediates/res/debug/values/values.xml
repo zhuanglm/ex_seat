@@ -30,6 +30,7 @@
     <string name="button_name3">连接</string>
     <string name="button_name4">断开</string>
     <string name="button_send">Say something</string>
+    <string name="button_start">Start</string>
     <string name="default_message">Click button below!</string>
     <string name="hello_world">Hello world!</string>
     <string name="interact_message">You just clicked on the Button!</string>

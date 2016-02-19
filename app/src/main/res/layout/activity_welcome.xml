@@ -52,9 +52,9 @@
         android:background="@drawable/btnstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_name2"
+        android:text="@string/button_start"
         android:textColor="#ffffff"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:height="37dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />

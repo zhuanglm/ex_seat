@@ -79,6 +79,7 @@ public class DataGraph extends View{
         green_paint.setStrokeWidth(1);
         green_paint.setColor(Color.GREEN);
         green_paint.setTextSize(20);
+        green_paint.setAntiAlias(true);
                                                                          
         //画Y轴 
         canvas.drawLine(XPoint, YPoint - YLength, XPoint, YPoint, paint);
@@ -92,7 +93,6 @@ public class DataGraph extends View{
             float y = YPoint - i * YScale;
         	if(i>0) {
                 canvas.drawLine(XPoint, y, XPoint + XLength, y, green_paint);  //刻度
-                canvas.drawLine(XPoint, y+1, XPoint + XLength, y+1, green_paint);
             }
                                                                              
             canvas.drawText(YLabel[i], XPoint - 50, YPoint - i * YScale, paint);//文字 

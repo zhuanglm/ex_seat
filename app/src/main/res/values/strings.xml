@@ -7,6 +7,7 @@
     <string name="action_return">return</string>
     <string name="action_exit">Exit</string>
     <string name="button_send">Say something</string>
+    <string name="button_start">Start</string>
     <string name="button_name1">停止</string>
     <string name="button_name2">开始</string>
     <string name="button_name3">连接</string>
