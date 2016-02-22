@@ -8,4 +8,5 @@ public class DataDef {
 	public static int msgTYPE_NO = 0;
 	public static List<Integer> dataFromDev = new ArrayList<Integer>();
 	public static int MaxDataSize=0;
+	public static int WinTabNum=3;
 }

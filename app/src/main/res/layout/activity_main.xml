@@ -11,81 +11,64 @@
     tools:context="com.example.ex_seat.MainActivity">
 
     <LinearLayout
-        android:id="@+id/widget_layout"
+        android:id="@+id/top_ly"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:orientation="vertical" >
+        android:orientation="horizontal"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:paddingBottom="0dp"
+        android:layout_alignParentBottom="true">
 
         <TextView
             android:id="@+id/textView1"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/hello_world"
-            android:textSize="20sp" />
-        
-        <com.example.ex_seat.DashboardView
-            android:id="@+id/dashboardView1"
+            android:layout_height="50dp"
+            android:background="#0E1A44"
+            android:gravity="center"
+            android:text="页面1"
+            android:textColor="@drawable/white"
+            />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:textColor="@drawable/lightred"
-            
-            app:bigSliceCount="8"
-            app:headerRadius="50dp"
-            app:headerTitle="RPM"
-            app:maxValue="800"
-            app:measureTextSize="8sp"
-            app:radius="100dp"
-            app:realTimeValue="100"
-            app:startAngle="210"
-            app:stripeWidth="10dp"
-            app:stripeMode="normal"
-            app:sweepAngle="120"/>
-
-        <LinearLayout
-            style="?android:attr/buttonBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical" >
-
-            <Button
-                android:id="@+id/button1"
-                style="?android:attr/buttonBarStyle"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="0.07"
-                
-                android:text="@string/button_name1" />
-
-            <Button
-                android:id="@+id/button2"
-                android:onClick="BTSwitch"
-                style="?android:attr/buttonBarStyle"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="0.07"
-                android:layout_width="100dp"
-                android:text="@string/button_name3" />
-
-        </LinearLayout>
-
+            android:layout_height="50dp"
+            android:background="#0E1A44"
+            android:gravity="center"
+            android:text="页面2"
+            android:textColor="@drawable/white"
+            />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="#0E1A44"
+            android:gravity="center"
+            android:text="页面3"
+            android:textColor="@drawable/white"
+            />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/chart_layout"
+    <ImageView
+        android:id="@+id/cursor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="matrix"
+        android:src="@drawable/orange"
+        android:layout_above="@+id/top_ly"
+        android:layout_alignParentStart="true" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/white"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
-    </LinearLayout>
-    
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_above="@+id/top_ly"
+        android:layout_alignParentEnd="true" />
+
+
 </RelativeLayout>
 

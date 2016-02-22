@@ -89,7 +89,7 @@ public class DataGraph extends View{
         canvas.drawLine(XPoint, YPoint - YLength, XPoint + 5, YPoint-YLength + 15 ,paint); 
                                                                          
         //添加刻度和文字 
-        for(int i=0; i * YScale < YLength; i++) { 
+        for(int i=0; i  < YScaleRange; i++) {
             float y = YPoint - i * YScale;
         	if(i>0) {
                 canvas.drawLine(XPoint, y, XPoint + XLength, y, green_paint);  //刻度

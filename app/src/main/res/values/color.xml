@@ -9,4 +9,5 @@
 	<drawable name="blue">#0000FF</drawable>
 	<drawable name="lightred">#90FF0000</drawable>
 	<drawable name="lightgray">#90505050</drawable>
+
 </resources>

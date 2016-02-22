@@ -1,6 +1,35 @@
 package com.example.ex_seat;
 
 
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.Matrix;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.view.ViewPager;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,26 +41,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.os.Handler;
-import android.os.Message;
 
 
 
@@ -89,9 +98,18 @@ public class MainActivity extends Activity {
 	private DashboardView dashboardView1;
 	private static boolean m_bStopFlag = false;
 	private static boolean m_bBTStartFlag = true;
+	private View view1, view2, view3;
+	private List<View> viewList;
+	private ViewPagerAdapter adapter;
+	private ViewPager viewPager;
 	Button BTSwitchbtn;
 	Button BKSwitchbtn;
-		
+	private int currentItem,offSet,bmWidth;
+	private Animation animation;
+	private Bitmap cursor;
+	private ImageView imageView;
+	private Matrix matrix = new Matrix();
+
 	Runnable runnable_long=new Runnable() {
 	    @Override
 	    public void run() {
@@ -166,7 +184,76 @@ public class MainActivity extends Activity {
 
 		ActionBar actionBar=getActionBar();
 		actionBar.setDisplayShowTitleEnabled(false);
-		
+
+		viewList = new ArrayList<View>();
+
+		LayoutInflater lf = getLayoutInflater().from(this);
+		view1 = lf.inflate(R.layout.layout_guage, null);
+		view2 = lf.inflate(R.layout.layout_record, null);
+		view3 = lf.inflate(R.layout.layout_record, null);
+
+		imageView = (ImageView) findViewById(R.id.cursor);
+
+		viewList.add(view1);
+		viewList.add(view2);
+		viewList.add(view3);
+
+		initeCursor();
+
+		adapter = new ViewPagerAdapter(viewList);
+		viewPager = (ViewPager) findViewById(R.id.viewPager);
+		viewPager.setAdapter(adapter);
+
+		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+			// 顶部的imageView是通过animation缓慢的滑动
+			@Override
+			public void onPageSelected(int arg0) {
+				switch (arg0) {
+					case 0:
+						if (currentItem == 1) {
+							animation = new TranslateAnimation(
+									offSet * 2 + bmWidth, 0, 0, 0);
+						} else if (currentItem == 2) {
+							animation = new TranslateAnimation(offSet * 4 + 2
+									* bmWidth, 0, 0, 0);
+						}
+						break;
+					case 1:
+						if (currentItem == 0) {
+							animation = new TranslateAnimation(0, offSet * 2
+									+ bmWidth, 0, 0);
+						} else if (currentItem == 2) {
+							animation = new TranslateAnimation(4 * offSet + 2
+									* bmWidth, offSet * 2 + bmWidth, 0, 0);
+						}
+						break;
+					case 2:
+						if (currentItem == 0) {
+							animation = new TranslateAnimation(0, 4 * offSet + 2
+									* bmWidth, 0, 0);
+						} else if (currentItem == 1) {
+							animation = new TranslateAnimation(
+									offSet * 2 + bmWidth, 4 * offSet + 2 * bmWidth,
+									0, 0);
+						}
+				}
+				currentItem = arg0;
+				animation.setDuration(150); // 光标滑动速度
+				animation.setFillAfter(true);
+				imageView.startAnimation(animation);
+			}
+
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+			}
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+
+			}
+		});
+
 		/*DatabaseHelper database = new DatabaseHelper(this,DB_NAME,null,version);
 		SQLiteDatabase db = database.getReadableDatabase();
 		
@@ -175,22 +262,22 @@ public class MainActivity extends Activity {
 		cv.put("password","wuyi"); 
 		db.insert("user",null,cv);*/
 		
-		dashboardView1 = (DashboardView) findViewById(R.id.dashboardView1);
+		dashboardView1 = (DashboardView) view1.findViewById(R.id.dashboardView1);
 		List<HighlightCR> highlight1 = new ArrayList<HighlightCR>();
         highlight1.add(new HighlightCR(210, 60, Color.parseColor("#03A9F4")));
         highlight1.add(new HighlightCR(270, 60, Color.parseColor("#FFA000")));
         dashboardView1.setStripeHighlightColorAndRange(highlight1);
 		
-		LinearLayout layout = (LinearLayout)findViewById(R.id.chart_layout);
+		LinearLayout layout = (LinearLayout)view1.findViewById(R.id.chart_layout);
 		drawView = new DataGraph(this);//创建自定义的控件
 		drawView.setMinimumHeight(300);
 		drawView.setMinimumWidth(500);
 		layout.addView(drawView);//讲自定义的控件进行添加
 		
-		BKSwitchbtn = (Button)findViewById(R.id.button1);
-		BTSwitchbtn = (Button)findViewById(R.id.button2);
+		BKSwitchbtn = (Button)view1.findViewById(R.id.button1);
+		BTSwitchbtn = (Button)view1.findViewById(R.id.button2);
 		contextAct = getApplicationContext();
-		hellotv = (TextView)findViewById(R.id.textView1);
+		hellotv = (TextView)view1.findViewById(R.id.textView_http);
 		
 		
 		BKSwitchbtn.setOnClickListener(new View.OnClickListener() {
@@ -329,6 +416,25 @@ public class MainActivity extends Activity {
 		   }
 		}
 		return true;
+	}
+
+	private void initeCursor() {
+		cursor = BitmapFactory.decodeResource(getResources(), R.drawable.cursor);
+		bmWidth = cursor.getWidth();
+
+		DisplayMetrics dm;
+		dm = getResources().getDisplayMetrics();
+
+		//offSet = (dm.widthPixels - 3 * bmWidth) / 6;
+		float scalx = (dm.widthPixels/DataDef.WinTabNum);
+		scalx /= bmWidth;
+		matrix.setScale(scalx,1f);
+		bmWidth*=scalx;
+		offSet = (dm.widthPixels/DataDef.WinTabNum - bmWidth) / 2;
+		//matrix.setTranslate(offSet, 0);
+		matrix.postTranslate(offSet, 0);
+		imageView.setImageMatrix(matrix); // 需要imageView的scaleType为matrix
+		currentItem = 0;
 	}
 	
 	ArrayList<Integer> myChose= new ArrayList<Integer>();  
