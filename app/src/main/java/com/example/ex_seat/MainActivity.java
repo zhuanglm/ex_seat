@@ -6,9 +6,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -25,8 +28,11 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +42,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -45,6 +52,34 @@ import java.util.Set;
 
 
 public class MainActivity extends Activity {
+
+	public MyHandler handler = new MyHandler(this);
+	StringBuffer result = new StringBuffer();
+	String sR = "abc";
+	static Context contextAct;
+	TextView hellotv;
+	private DataGraph drawView;
+	private DashboardView dashboardView1;
+	private static boolean m_bStopFlag = false;
+	private static boolean m_bBTStartFlag = true;
+	private View view1, view2, view3;
+	private List<View> viewList;
+	private ViewPagerAdapter adapter;
+	private ViewPager viewPager;
+	Button BTSwitchbtn;
+	Button BKSwitchbtn;
+	private int currentItem,offSet,bmWidth;
+	private Animation animation;
+	private Bitmap view_cursor;
+	private ImageView imageView;
+	private Matrix matrix = new Matrix();
+	private ListView m_listviewData;
+
+	private static final String DB_NAME = "ex_seat.db"; //数据库名称
+	private static final int version = 1; //数据库版本
+	private DatabaseHelper database;
+	private SQLiteDatabase db;
+	private Cursor db_cursor;
 
 	public static class MyHandler extends Handler {
 	    private final WeakReference<MainActivity> mActivity;
@@ -77,10 +112,12 @@ public class MainActivity extends Activity {
 						break;
 					case 0x1234: 
 						int nRandom = msg.getData().getInt("get_data");
+						DataCollector.getAverageRPM(nRandom);
 						//activity.ceshitv.setText(Integer.toString(nRandom));
 						activity.drawView.invalidate();
 						activity.dashboardView1.setRealTimeValue(nRandom);
 						activity.dashboardView1.invalidate();
+
 						break;
 					default:
 						break;
@@ -89,26 +126,7 @@ public class MainActivity extends Activity {
 	    }
 	}
 	 
-	public MyHandler handler = new MyHandler(this);
-	StringBuffer result = new StringBuffer();
-	String sR = "abc";
-	static Context contextAct;
-	TextView hellotv;
-	private DataGraph drawView;
-	private DashboardView dashboardView1;
-	private static boolean m_bStopFlag = false;
-	private static boolean m_bBTStartFlag = true;
-	private View view1, view2, view3;
-	private List<View> viewList;
-	private ViewPagerAdapter adapter;
-	private ViewPager viewPager;
-	Button BTSwitchbtn;
-	Button BKSwitchbtn;
-	private int currentItem,offSet,bmWidth;
-	private Animation animation;
-	private Bitmap cursor;
-	private ImageView imageView;
-	private Matrix matrix = new Matrix();
+
 
 	Runnable runnable_long=new Runnable() {
 	    @Override
@@ -141,11 +159,7 @@ public class MainActivity extends Activity {
 	Runnable runnable_short=new Runnable() {
 	    @Override
 	    public void run() {
-	        
-	    	result.delete(0, result.length());
-	    	result.append(getResources().getString(R.string.Req_URL));
-	    	result.append(getString(R.string.Design_Total));
-	    	
+
 	    	Thread tBT = new Thread(){
 				public void run() {  
 					
@@ -167,13 +181,12 @@ public class MainActivity extends Activity {
 			};
 			tBT.start();
 	    	//Toast.makeText(getApplicationContext(),sR,Toast.LENGTH_SHORT).show();
-	        handler.postDelayed(this, 300);
+	        handler.postDelayed(this, DataDef.TimeInterver_BT);
 						
 			}
 	};
 	
-	//private static final String DB_NAME = "ex_seat.db"; //数据库名称
-    //private static final int version = 1; //数据库版本
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -185,12 +198,17 @@ public class MainActivity extends Activity {
 		ActionBar actionBar=getActionBar();
 		actionBar.setDisplayShowTitleEnabled(false);
 
+		database = new DatabaseHelper(this,DB_NAME,null,version);
+		db = database.getReadableDatabase();
+
 		viewList = new ArrayList<View>();
 
 		LayoutInflater lf = getLayoutInflater().from(this);
 		view1 = lf.inflate(R.layout.layout_guage, null);
 		view2 = lf.inflate(R.layout.layout_record, null);
 		view3 = lf.inflate(R.layout.layout_record, null);
+
+		m_listviewData = (ListView)view2.findViewById(R.id.listView_data);
 
 		imageView = (ImageView) findViewById(R.id.cursor);
 
@@ -204,7 +222,9 @@ public class MainActivity extends Activity {
 		viewPager = (ViewPager) findViewById(R.id.viewPager);
 		viewPager.setAdapter(adapter);
 
-		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+			//Cursor cursor;
 
 			// 顶部的imageView是通过animation缓慢的滑动
 			@Override
@@ -227,6 +247,19 @@ public class MainActivity extends Activity {
 							animation = new TranslateAnimation(4 * offSet + 2
 									* bmWidth, offSet * 2 + bmWidth, 0, 0);
 						}
+
+						db_cursor = db.query("data", new String[]{"_id", "date", "duration", "avg"}, null, null, null, null, null);
+						/*while(cursor.moveToNext()){
+							String date = cursor.getString(cursor.getColumnIndex("date"));
+							String dura = cursor.getString(cursor.getColumnIndex("duration"));
+							String max = cursor.getString(cursor.getColumnIndex("avg"));
+						}*/
+						if (db_cursor != null) {
+							SimpleCursorAdapter simple_adapter = new SimpleCursorAdapter(view2.getContext(), R.layout.data_item, db_cursor,
+									new String[]{"date", "duration", "avg"}, new int[]{R.id.date, R.id.duration, R.id.avg},
+									CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+							m_listviewData.setAdapter(simple_adapter);
+						}
 						break;
 					case 2:
 						if (currentItem == 0) {
@@ -248,19 +281,14 @@ public class MainActivity extends Activity {
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
 
 			}
+
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
 
 			}
 		});
 
-		/*DatabaseHelper database = new DatabaseHelper(this,DB_NAME,null,version);
-		SQLiteDatabase db = database.getReadableDatabase();
-		
-		ContentValues cv = new ContentValues();
-		cv.put("username","Raymond Zhuang");
-		cv.put("password","wuyi"); 
-		db.insert("user",null,cv);*/
+
 		
 		dashboardView1 = (DashboardView) view1.findViewById(R.id.dashboardView1);
 		List<HighlightCR> highlight1 = new ArrayList<HighlightCR>();
@@ -284,12 +312,12 @@ public class MainActivity extends Activity {
 	            @Override
 	            public void onClick(View v) {
 	                
-	                Toast.makeText(getApplicationContext(),"Clicked",Toast.LENGTH_SHORT).show();
+	                //Toast.makeText(getApplicationContext(),"Clicked",Toast.LENGTH_SHORT).show();
 	                
 	                if(m_bStopFlag)
 	                {
 	                	BKSwitchbtn.setText(R.string.button_name1);
-	                	handler.postDelayed(runnable_short, 300);
+	                	handler.postDelayed(runnable_short, DataDef.TimeInterver_BT);
 	            		handler.postDelayed(runnable_long, 1000);
 	            		m_bStopFlag = false;
 	                }
@@ -299,12 +327,25 @@ public class MainActivity extends Activity {
 	 	                handler.removeCallbacks(runnable_short);
 	 	            	handler.removeCallbacks(runnable_long);
 	 	            	m_bStopFlag = true;
+
+						SimpleDateFormat sDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+						String date = sDateFormat.format(new java.util.Date());
+						//Toast.makeText(getApplicationContext(),Integer.toString(DataCollector.m_nTimes*DataDef.TimeInterver_BT/1000),Toast.LENGTH_SHORT).show();
+						//Toast.makeText(getApplicationContext(),date,Toast.LENGTH_SHORT).show();
+						ContentValues cv = new ContentValues();
+						cv.put("date", date);
+						cv.put("duration",Integer.toString(DataCollector.m_nTimes*DataDef.TimeInterver_BT/1000));
+						cv.put("max",Integer.toString(DataCollector.getMaxRPM()));
+						cv.put("avg",Integer.toString(DataCollector.m_nAverageRPM));
+
+						db.insert("data", null, cv);
+						DataCollector.init();
 	                }
 	               
 	            }
 	        });
 		
-		handler.postDelayed(runnable_short, 300);
+		handler.postDelayed(runnable_short, DataDef.TimeInterver_BT);
 		handler.postDelayed(runnable_long, 1000);
 	}
 
@@ -419,8 +460,8 @@ public class MainActivity extends Activity {
 	}
 
 	private void initeCursor() {
-		cursor = BitmapFactory.decodeResource(getResources(), R.drawable.cursor);
-		bmWidth = cursor.getWidth();
+		view_cursor = BitmapFactory.decodeResource(getResources(), R.drawable.cursor);
+		bmWidth = view_cursor.getWidth();
 
 		DisplayMetrics dm;
 		dm = getResources().getDisplayMetrics();
@@ -495,7 +536,7 @@ public class MainActivity extends Activity {
                 // TODO Auto-generated method stub  
             	handler.removeCallbacks(runnable_short);
             	handler.removeCallbacks(runnable_long);
-            	
+            	db.close();
 				System.exit(0);
                 //Toast.makeText(getApplicationContext(),"确定",Toast.LENGTH_SHORT).show();
             }  

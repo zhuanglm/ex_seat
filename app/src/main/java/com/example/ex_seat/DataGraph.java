@@ -97,7 +97,7 @@ public class DataGraph extends View{
                                                                              
             canvas.drawText(YLabel[i], XPoint - 50, YPoint - i * YScale, paint);//文字 
         }
-        canvas.drawText("×100 r/Min", 0, 20, green_paint);
+        canvas.drawText("×100 r/Min", 10, 20, green_paint);
         //canvas.drawLine(XPoint, 311, XPoint + 1000, 311, green_paint);                                                                  
         //画X轴 
         canvas.drawLine(XPoint, YPoint, XPoint + XLength, YPoint, paint); 

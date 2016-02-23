@@ -14,8 +14,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	@Override
+	//"_id" have to setup for SimpleCursorAdapter
 	public void onCreate(SQLiteDatabase db) {
-		String sql = "create table user(username varchar(20) not null , password varchar(60) not null );";          
+		String sql = "create table data(_id integer primary key autoincrement,date varchar(20) not null , " +
+				"duration varchar(20) not null,max varchar(5),avg varchar(5) );";
         db.execSQL(sql);
 
 	}
