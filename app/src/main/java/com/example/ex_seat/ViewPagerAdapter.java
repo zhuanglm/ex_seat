@@ -13,9 +13,6 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     List<View> viewLists;
 
-    public void startUpdate(View arg0) {
-    }
-
     public void restoreState(Parcelable arg0, ClassLoader arg1) {
     }
 
@@ -23,8 +20,6 @@ public class ViewPagerAdapter extends PagerAdapter {
         return null;
     }
 
-    public void finishUpdate(View arg0) {
-    }
 
     public ViewPagerAdapter(List<View> lists)
     {

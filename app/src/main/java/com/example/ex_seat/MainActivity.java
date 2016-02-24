@@ -58,13 +58,14 @@ public class MainActivity extends Activity {
 	String sR = "abc";
 	static Context contextAct;
 	TextView hellotv;
+	private ActionBar actionBar;
 	private DataGraph drawView;
 	private DashboardView dashboardView1;
 	private static boolean m_bStopFlag = false;
 	private static boolean m_bBTStartFlag = true;
 	private View view1, view2, view3;
 	private List<View> viewList;
-	private ViewPagerAdapter adapter;
+	private ViewPagerAdapter viewPager_adapter;
 	private ViewPager viewPager;
 	Button BTSwitchbtn;
 	Button BKSwitchbtn;
@@ -72,6 +73,9 @@ public class MainActivity extends Activity {
 	private Animation animation;
 	private Bitmap view_cursor;
 	private ImageView imageView;
+	private TextView textView1;
+	private TextView textView2;
+	private TextView textView3;
 	private Matrix matrix = new Matrix();
 	private ListView m_listviewData;
 
@@ -80,6 +84,8 @@ public class MainActivity extends Activity {
 	private DatabaseHelper database;
 	private SQLiteDatabase db;
 	private Cursor db_cursor;
+	private SimpleDateFormat sDateFormat;
+	private SimpleCursorAdapter simple_adapter;
 
 	public static class MyHandler extends Handler {
 	    private final WeakReference<MainActivity> mActivity;
@@ -195,8 +201,9 @@ public class MainActivity extends Activity {
  		Bundle bundle = intent.getExtras();  //获得全部数据
 		String value = bundle.getString("name");  //获得名为name的值
 
-		ActionBar actionBar=getActionBar();
-		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar=getActionBar();
+		//actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setTitle(R.string.app_page1);
 
 		database = new DatabaseHelper(this,DB_NAME,null,version);
 		db = database.getReadableDatabase();
@@ -208,9 +215,18 @@ public class MainActivity extends Activity {
 		view2 = lf.inflate(R.layout.layout_record, null);
 		view3 = lf.inflate(R.layout.layout_record, null);
 
-		m_listviewData = (ListView)view2.findViewById(R.id.listView_data);
+		m_listviewData = (ListView) view2.findViewById(R.id.listView_data);
+
+		db_cursor = db.query("data", new String[]{"_id", "date", "duration", "avg"}, null, null, null, null, null);
+		simple_adapter = new SimpleCursorAdapter(view2.getContext(), R.layout.data_item, db_cursor,
+				new String[]{"date", "duration", "avg"}, new int[]{R.id.date, R.id.duration, R.id.avg},
+				CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+		m_listviewData.setAdapter(simple_adapter);
 
 		imageView = (ImageView) findViewById(R.id.cursor);
+		textView1 = (TextView) findViewById(R.id.textView1);
+		textView2 = (TextView) findViewById(R.id.textView2);
+		textView3 = (TextView) findViewById(R.id.textView3);
 
 		viewList.add(view1);
 		viewList.add(view2);
@@ -218,9 +234,9 @@ public class MainActivity extends Activity {
 
 		initeCursor();
 
-		adapter = new ViewPagerAdapter(viewList);
+		viewPager_adapter = new ViewPagerAdapter(viewList);
 		viewPager = (ViewPager) findViewById(R.id.viewPager);
-		viewPager.setAdapter(adapter);
+		viewPager.setAdapter(viewPager_adapter);
 
 		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -238,6 +254,7 @@ public class MainActivity extends Activity {
 							animation = new TranslateAnimation(offSet * 4 + 2
 									* bmWidth, 0, 0, 0);
 						}
+						actionBar.setTitle(R.string.app_page1);
 						break;
 					case 1:
 						if (currentItem == 0) {
@@ -248,18 +265,7 @@ public class MainActivity extends Activity {
 									* bmWidth, offSet * 2 + bmWidth, 0, 0);
 						}
 
-						db_cursor = db.query("data", new String[]{"_id", "date", "duration", "avg"}, null, null, null, null, null);
-						/*while(cursor.moveToNext()){
-							String date = cursor.getString(cursor.getColumnIndex("date"));
-							String dura = cursor.getString(cursor.getColumnIndex("duration"));
-							String max = cursor.getString(cursor.getColumnIndex("avg"));
-						}*/
-						if (db_cursor != null) {
-							SimpleCursorAdapter simple_adapter = new SimpleCursorAdapter(view2.getContext(), R.layout.data_item, db_cursor,
-									new String[]{"date", "duration", "avg"}, new int[]{R.id.date, R.id.duration, R.id.avg},
-									CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-							m_listviewData.setAdapter(simple_adapter);
-						}
+						actionBar.setTitle(R.string.app_page2);
 						break;
 					case 2:
 						if (currentItem == 0) {
@@ -270,6 +276,8 @@ public class MainActivity extends Activity {
 									offSet * 2 + bmWidth, 4 * offSet + 2 * bmWidth,
 									0, 0);
 						}
+						actionBar.setTitle(R.string.app_page3);
+						break;
 				}
 				currentItem = arg0;
 				animation.setDuration(150); // 光标滑动速度
@@ -288,8 +296,27 @@ public class MainActivity extends Activity {
 			}
 		});
 
+		textView1.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				viewPager.setCurrentItem(0);
+			}
+		});
 
-		
+		textView2.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				viewPager.setCurrentItem(1);
+			}
+		});
+
+		textView3.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				viewPager.setCurrentItem(2);
+			}
+		});
+
 		dashboardView1 = (DashboardView) view1.findViewById(R.id.dashboardView1);
 		List<HighlightCR> highlight1 = new ArrayList<HighlightCR>();
         highlight1.add(new HighlightCR(210, 60, Color.parseColor("#03A9F4")));
@@ -328,18 +355,29 @@ public class MainActivity extends Activity {
 	 	            	handler.removeCallbacks(runnable_long);
 	 	            	m_bStopFlag = true;
 
-						SimpleDateFormat sDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+						sDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
 						String date = sDateFormat.format(new java.util.Date());
 						//Toast.makeText(getApplicationContext(),Integer.toString(DataCollector.m_nTimes*DataDef.TimeInterver_BT/1000),Toast.LENGTH_SHORT).show();
 						//Toast.makeText(getApplicationContext(),date,Toast.LENGTH_SHORT).show();
 						ContentValues cv = new ContentValues();
 						cv.put("date", date);
-						cv.put("duration",Integer.toString(DataCollector.m_nTimes*DataDef.TimeInterver_BT/1000));
-						cv.put("max",Integer.toString(DataCollector.getMaxRPM()));
-						cv.put("avg",Integer.toString(DataCollector.m_nAverageRPM));
+						cv.put("duration",Integer.toString(DataCollector.m_nTimes*DataDef.TimeInterver_BT / 1000));
+						cv.put("max", Integer.toString(DataCollector.getMaxRPM()));
+						cv.put("avg", Integer.toString(DataCollector.m_nAverageRPM));
 
 						db.insert("data", null, cv);
 						DataCollector.init();
+
+						db_cursor = db.query("data", new String[]{"_id", "date", "duration", "avg"}, null, null, null, null, null);
+						simple_adapter.swapCursor(null);
+						simple_adapter.swapCursor(db_cursor);
+
+						/*while(cursor.moveToNext()){
+							String date = cursor.getString(cursor.getColumnIndex("date"));
+							String dura = cursor.getString(cursor.getColumnIndex("duration"));
+							String max = cursor.getString(cursor.getColumnIndex("avg"));
+						}*/
+
 	                }
 	               
 	            }
@@ -408,10 +446,16 @@ public class MainActivity extends Activity {
 			
 			return true;
 		}
+		else if(id == R.id.action_clear)
+		{
+			db.delete("data",null,null);
+			db_cursor = db.query("data", new String[]{"_id", "date", "duration", "avg"}, null, null, null, null, null);
+			simple_adapter.swapCursor(null);
+			simple_adapter.swapCursor(db_cursor);
+		}
 		else if(id == R.id.action_exit)
 		{
 			showExitDia();
-			
 		}
 
 		return super.onOptionsItemSelected(item);
@@ -536,7 +580,8 @@ public class MainActivity extends Activity {
                 // TODO Auto-generated method stub  
             	handler.removeCallbacks(runnable_short);
             	handler.removeCallbacks(runnable_long);
-            	db.close();
+
+				db.close();
 				System.exit(0);
                 //Toast.makeText(getApplicationContext(),"确定",Toast.LENGTH_SHORT).show();
             }  

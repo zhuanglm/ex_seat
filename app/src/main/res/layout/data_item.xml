@@ -9,18 +9,25 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:id="@+id/avg"
+        android:textSize="20sp"
+        
         />
     <!-- 时长 -->
     <TextView
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:id="@+id/duration"
+        android:gravity="center"
+        android:textSize="20sp"
         />
     <!-- 日期 -->
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/date"
+        android:gravity="end"
+        android:textSize="20sp"
+        android:textColor="@drawable/blue"
         />
 
 </LinearLayout>
