@@ -15,7 +15,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:id="@+id/linearLayout1"
+        android:layout_above="@+id/linearLayout2">
 
         <TextView
             android:id="@+id/title"
@@ -28,7 +30,8 @@
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#ffffff"
-            android:textSize="28dp" />
+            android:textSize="28dp"
+            android:paddingTop="10dp" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -36,40 +39,45 @@
             android:layout_height="120dp"
             android:layout_gravity="top"
             android:layout_marginTop="10dp"
-            android:src="@drawable/title" />
+            android:src="@drawable/title"
+            android:paddingTop="10dp" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
-            android:layout_height="250dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/cover" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/linearLayout1"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
+            android:src="@drawable/cover"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/btnstyle"
-            android:text="@string/button_start"
-            android:textColor="#ffffff"
-            android:textSize="16sp" />
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
 
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
     </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/linearLayout2">
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btnstyle"
+                android:text="@string/button_start"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
+        </LinearLayout>
 
 </RelativeLayout><!-- From: file:/D:/ADT%20workspace/ex_seat/app/src/main/res/layout/activity_welcome.xml -->

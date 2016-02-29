@@ -231,9 +231,11 @@ public class MainActivity extends Activity {
 
 		//3rd page
 		text_username = (TextView) view3.findViewById(R.id.text_username);
-		text_username.setText(DataDef.profile.getName());
-		profilePictureView = (ProfilePictureView) view3.findViewById(R.id.profilePicture);
-		profilePictureView.setProfileId(DataDef.profile.getId());
+		if(DataDef.accessToken != null) {
+			text_username.setText(DataDef.profile.getName());
+			profilePictureView = (ProfilePictureView) view3.findViewById(R.id.profilePicture);
+			profilePictureView.setProfileId(DataDef.profile.getId());
+		}
 
 		imageView = (ImageView) findViewById(R.id.cursor);
 		textView1 = (TextView) findViewById(R.id.textView1);
