@@ -27,7 +27,7 @@
             android:layout_height="50dp"
             android:background="#0E1A44"
             android:gravity="center"
-            android:text="页面1"
+            android:text="Guage"
             android:textColor="@drawable/white"
             />
         <TextView
@@ -37,7 +37,7 @@
             android:layout_height="50dp"
             android:background="#0E1A44"
             android:gravity="center"
-            android:text="页面2"
+            android:text="History"
             android:textColor="@drawable/white"
             />
         <TextView
@@ -47,7 +47,7 @@
             android:layout_height="50dp"
             android:background="#0E1A44"
             android:gravity="center"
-            android:text="页面3"
+            android:text="Profile"
             android:textColor="@drawable/white"
             />
     </LinearLayout>

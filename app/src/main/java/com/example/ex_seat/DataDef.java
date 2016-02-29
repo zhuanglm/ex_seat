@@ -1,5 +1,8 @@
 package com.example.ex_seat;
 
+import com.facebook.AccessToken;
+import com.facebook.Profile;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,4 +13,7 @@ public class DataDef {
 	public static int MaxDataSize=0;
 	public static int WinTabNum=3;
 	public static int TimeInterver_BT=300;
+
+	public static AccessToken accessToken;
+	public static Profile profile;
 }

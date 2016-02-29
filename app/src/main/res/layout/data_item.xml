@@ -1,33 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
 
-    <!-- 平均 -->
-    <TextView
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/avg"
-        android:textSize="20sp"
-        
-        />
-    <!-- 时长 -->
-    <TextView
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/duration"
-        android:gravity="center"
-        android:textSize="20sp"
-        />
-    <!-- 日期 -->
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/date"
-        android:gravity="end"
-        android:textSize="20sp"
-        android:textColor="@drawable/blue"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/item_subtitle"
+            android:id="@+id/max_title"
+            android:textSize="16sp"
+            android:textColor="@drawable/blue"
+            />
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/max"
+            android:gravity="end"
+            android:textSize="14sp"
+            android:textColor="@drawable/red"
+            />
+        <!-- 日期 -->
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/date"
+            android:gravity="end"
+            android:textSize="12sp"
+            android:textColor="@drawable/darkgray"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <!-- 平均 -->
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/avg_title"
+            android:text="@string/item_avgtitle"
+            android:textSize="16sp"
+
+            android:paddingLeft="20dp" />
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/avg"
+            android:textSize="16sp"
+            android:textColor="@drawable/green"
+         />
+        <!-- 时长 -->
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/duration"
+            android:gravity="center"
+            android:textSize="16sp"
+            />
+    </LinearLayout>
 </LinearLayout>

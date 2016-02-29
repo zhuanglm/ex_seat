@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="facebook_app_id">193614721005020</string>
     <string name="app_name">ex_seat</string>
     <string name="app_page1">Workout</string>
     <string name="app_page2">History</string>
+    <string name="item_subtitle">Total Max RPM:</string>
+    <string name="item_avgtitle">Average:</string>
     <string name="app_page3">Leaderboard</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -21,5 +23,6 @@
     <string name="r_min">×100 r/Min</string>
     <string name="Req_URL">http://67.224.94.82/mobileApp</string>
     <string name="Design_Total">/CollageAPI.ashx?action=load_publish_total</string>
+
 
 </resources>

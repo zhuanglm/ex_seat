@@ -17,6 +17,11 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
-    compile files('libs/android-support-v4.jar')
+
+    compile ('com.facebook.android:facebook-android-sdk:4.+')
 }

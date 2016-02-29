@@ -36,6 +36,8 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.widget.ProfilePictureView;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,7 +50,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-
+import java.util.TimeZone;
 
 
 public class MainActivity extends Activity {
@@ -76,6 +78,7 @@ public class MainActivity extends Activity {
 	private TextView textView1;
 	private TextView textView2;
 	private TextView textView3;
+	private TextView text_username;
 	private Matrix matrix = new Matrix();
 	private ListView m_listviewData;
 
@@ -86,6 +89,8 @@ public class MainActivity extends Activity {
 	private Cursor db_cursor;
 	private SimpleDateFormat sDateFormat;
 	private SimpleCursorAdapter simple_adapter;
+
+	private ProfilePictureView profilePictureView;
 
 	public static class MyHandler extends Handler {
 	    private final WeakReference<MainActivity> mActivity;
@@ -213,15 +218,22 @@ public class MainActivity extends Activity {
 		LayoutInflater lf = getLayoutInflater().from(this);
 		view1 = lf.inflate(R.layout.layout_guage, null);
 		view2 = lf.inflate(R.layout.layout_record, null);
-		view3 = lf.inflate(R.layout.layout_record, null);
+		view3 = lf.inflate(R.layout.layout_leader, null);
 
+		//2nd page
 		m_listviewData = (ListView) view2.findViewById(R.id.listView_data);
 
-		db_cursor = db.query("data", new String[]{"_id", "date", "duration", "avg"}, null, null, null, null, null);
+		db_cursor = db.query("data", new String[]{"_id","max", "date", "duration", "avg"}, null, null, null, null, null);
 		simple_adapter = new SimpleCursorAdapter(view2.getContext(), R.layout.data_item, db_cursor,
-				new String[]{"date", "duration", "avg"}, new int[]{R.id.date, R.id.duration, R.id.avg},
+				new String[]{"max","date", "duration", "avg"}, new int[]{R.id.max,R.id.date, R.id.duration, R.id.avg},
 				CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 		m_listviewData.setAdapter(simple_adapter);
+
+		//3rd page
+		text_username = (TextView) view3.findViewById(R.id.text_username);
+		text_username.setText(DataDef.profile.getName());
+		profilePictureView = (ProfilePictureView) view3.findViewById(R.id.profilePicture);
+		profilePictureView.setProfileId(DataDef.profile.getId());
 
 		imageView = (ImageView) findViewById(R.id.cursor);
 		textView1 = (TextView) findViewById(R.id.textView1);
@@ -361,14 +373,19 @@ public class MainActivity extends Activity {
 						//Toast.makeText(getApplicationContext(),date,Toast.LENGTH_SHORT).show();
 						ContentValues cv = new ContentValues();
 						cv.put("date", date);
-						cv.put("duration",Integer.toString(DataCollector.m_nTimes*DataDef.TimeInterver_BT / 1000));
+						long  ms = DataCollector.m_nTimes*DataDef.TimeInterver_BT ;//毫秒数
+						SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");//初始化Formatter的转换格式。
+						formatter.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
+						String hms = formatter.format(ms);
+						//cv.put("duration",Integer.toString(DataCollector.m_nTimes*DataDef.TimeInterver_BT / 1000));
+						cv.put("duration",hms);
 						cv.put("max", Integer.toString(DataCollector.getMaxRPM()));
 						cv.put("avg", Integer.toString(DataCollector.m_nAverageRPM));
 
 						db.insert("data", null, cv);
 						DataCollector.init();
 
-						db_cursor = db.query("data", new String[]{"_id", "date", "duration", "avg"}, null, null, null, null, null);
+						db_cursor = db.query("data", new String[]{"_id","max", "date", "duration", "avg"}, null, null, null, null, null);
 						simple_adapter.swapCursor(null);
 						simple_adapter.swapCursor(db_cursor);
 
@@ -449,7 +466,7 @@ public class MainActivity extends Activity {
 		else if(id == R.id.action_clear)
 		{
 			db.delete("data",null,null);
-			db_cursor = db.query("data", new String[]{"_id", "date", "duration", "avg"}, null, null, null, null, null);
+			db_cursor = db.query("data", new String[]{"_id","max", "date", "duration", "avg"}, null, null, null, null, null);
 			simple_adapter.swapCursor(null);
 			simple_adapter.swapCursor(db_cursor);
 		}
