@@ -36,7 +36,13 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.widget.ProfilePictureView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -231,10 +237,42 @@ public class MainActivity extends Activity {
 
 		//3rd page
 		text_username = (TextView) view3.findViewById(R.id.text_username);
+		final TextView text_email = (TextView) view3.findViewById(R.id.textEmail);
+		final TextView text_city = (TextView) view3.findViewById(R.id.textLocation);
+		text_username = (TextView) view3.findViewById(R.id.text_username);
 		if(DataDef.accessToken != null) {
-			text_username.setText(DataDef.profile.getName());
+			//text_username.setText(DataDef.profile.getName());
 			profilePictureView = (ProfilePictureView) view3.findViewById(R.id.profilePicture);
-			profilePictureView.setProfileId(DataDef.profile.getId());
+			//profilePictureView.setProfileId(DataDef.profile.getId());
+
+			GraphRequest request = GraphRequest.newMeRequest(
+					DataDef.accessToken, new GraphRequest.GraphJSONObjectCallback() {
+						@Override
+						public void onCompleted(JSONObject me, GraphResponse response) {
+							if (response.getError() != null) {
+								// handle error
+							} else {
+								String email = me.optString("email");
+								String name = me.optString("name");
+								String id = me.optString("id");
+								String birthday = me.optString("birthday");
+
+								try{
+									String location = me.getJSONObject("location").optString("name");
+									text_city.setText(location);
+								}catch (JSONException e) {
+									e.printStackTrace();
+								}
+								text_username.setText(name);
+								text_email.setText(email);
+								profilePictureView.setProfileId(id);
+							}
+						}
+					});
+			Bundle parameters = new Bundle();
+			parameters.putString("fields", "id,name,email,location,gender,birthday");
+			request.setParameters(parameters);
+			request.executeAsync();
 		}
 
 		imageView = (ImageView) findViewById(R.id.cursor);
@@ -593,27 +631,43 @@ public class MainActivity extends Activity {
         normalDia.setTitle("普通的对话框");  
         normalDia.setMessage("退出系统？");  
           
-        normalDia.setPositiveButton("确定", new DialogInterface.OnClickListener() {  
-            @Override  
-            public void onClick(DialogInterface dialog, int which) {  
-                // TODO Auto-generated method stub  
-            	handler.removeCallbacks(runnable_short);
-            	handler.removeCallbacks(runnable_long);
+        normalDia.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				handler.removeCallbacks(runnable_short);
+				handler.removeCallbacks(runnable_long);
 
 				db.close();
 				System.exit(0);
-                //Toast.makeText(getApplicationContext(),"确定",Toast.LENGTH_SHORT).show();
-            }  
-        });  
-        normalDia.setNegativeButton("取消", new DialogInterface.OnClickListener() {  
-            @Override  
-            public void onClick(DialogInterface dialog, int which) {  
-                // TODO Auto-generated method stub  
-            	dialog.dismiss();
-                //Toast.makeText(getApplicationContext(),"取消",Toast.LENGTH_SHORT).show();
-            }  
-        });  
+				//Toast.makeText(getApplicationContext(),"确定",Toast.LENGTH_SHORT).show();
+			}
+		});
+        normalDia.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				dialog.dismiss();
+				//Toast.makeText(getApplicationContext(),"取消",Toast.LENGTH_SHORT).show();
+			}
+		});
         normalDia.create().show();
 		
-    } 
+    }
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		// Logs 'install' and 'app activate' App Events.
+		AppEventsLogger.activateApp(this);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+
+		// Logs 'app deactivate' App Event.
+		AppEventsLogger.deactivateApp(this);
+	}
 }

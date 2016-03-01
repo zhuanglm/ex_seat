@@ -17,6 +17,8 @@ import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import java.util.Arrays;
+
 public class WelcomeActivity extends Activity {
 	
 	private LoginButton		loginButton;
@@ -34,7 +36,7 @@ public class WelcomeActivity extends Activity {
 		mActionBar.hide();
 		
 		loginButton = (LoginButton)findViewById(R.id.login_button);
-	    loginButton.setReadPermissions("user_friends");
+	    loginButton.setReadPermissions(Arrays.asList("user_friends","email", "user_photos","user_location","user_birthday", "public_profile"));
 	    callbackManager = CallbackManager.Factory.create();
 	    
 	    /*accessTokenTracker = new AccessTokenTracker() {
@@ -65,6 +67,24 @@ public class WelcomeActivity extends Activity {
 				DataDef.profile = Profile.getCurrentProfile();
 				//String sLogonName = DataDef.accessToken.getUserId();
 				//Toast.makeText(getApplicationContext(),sLogonName,Toast.LENGTH_LONG).show();
+
+				/*GraphRequest request = GraphRequest.newMeRequest(
+						loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+							@Override
+							public void onCompleted(JSONObject me, GraphResponse response) {
+								if (response.getError() != null) {
+									// handle error
+								} else {
+									String email = me.optString("email");
+									String id = me.optString("id");
+									// send email and id to your web server
+								}
+							}
+						});
+				Bundle parameters = new Bundle();
+				parameters.putString("fields", "id,name,email,location,gender");
+				request.setParameters(parameters);
+				request.executeAsync();*/
 	        }
 
 	        @Override

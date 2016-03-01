@@ -78,6 +78,7 @@
     <drawable name="lightred">#90FF0000</drawable>
     <drawable name="red">#FF0000</drawable>
     <drawable name="white">#FFFFFF</drawable>
+    <drawable name="yellow">#FFFFCC</drawable>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="Design_Total">/CollageAPI.ashx?action=load_publish_total</string>
@@ -90,10 +91,10 @@
     <string name="app_page1">Workout</string>
     <string name="app_page2">History</string>
     <string name="app_page3">Leaderboard</string>
-    <string name="button_name1">停止</string>
-    <string name="button_name2">开始</string>
-    <string name="button_name3">连接</string>
-    <string name="button_name4">断开</string>
+    <string name="button_name1">Stop Calculating</string>
+    <string name="button_name2">Start Calculating</string>
+    <string name="button_name3">Connect Bluetooth</string>
+    <string name="button_name4">Disconnect Bluetooth</string>
     <string name="button_send">Say something</string>
     <string name="button_start">Start</string>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.10.0/res/values/values.xml -->
