@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+    <LinearLayout
+        android:id="@+id/widget_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/textView_http"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/hello_world"
+            android:textSize="10sp" />
+
+        <com.example.ex_seat.DashboardView
+            android:id="@+id/dashboardView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:textColor="@drawable/lightred"
+
+            app:bigSliceCount="8"
+            app:headerRadius="50dp"
+            app:headerTitle="RPM"
+            app:maxValue="800"
+            app:measureTextSize="8sp"
+            app:radius="100dp"
+            app:realTimeValue="100"
+            app:startAngle="210"
+            app:stripeWidth="10dp"
+            app:stripeMode="normal"
+            app:sweepAngle="120" />
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/chart_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/white"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="1"
+        android:padding="20dp">
+    </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/button1"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.07"
+
+            android:text="@string/button_name1" />
+
+        <Button
+            android:id="@+id/button2"
+            android:onClick="BTSwitch"
+            style="?android:attr/buttonBarStyle"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.07"
+            android:layout_width="100dp"
+            android:text="@string/button_name3" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -90,7 +90,7 @@
     <string name="app_name">ex_seat</string>
     <string name="app_page1">Workout</string>
     <string name="app_page2">History</string>
-    <string name="app_page3">Leaderboard</string>
+    <string name="app_page3">Profile</string>
     <string name="button_name1">Stop Calculating</string>
     <string name="button_name2">Start Calculating</string>
     <string name="button_name3">Connect Bluetooth</string>

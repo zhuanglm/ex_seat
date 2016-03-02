@@ -10,6 +10,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -21,6 +22,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -95,6 +97,7 @@ public class MainActivity extends Activity {
 	private Cursor db_cursor;
 	private SimpleDateFormat sDateFormat;
 	private SimpleCursorAdapter simple_adapter;
+	private int mCurrentOrientation;
 
 	private ProfilePictureView profilePictureView;
 
@@ -207,6 +210,8 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mCurrentOrientation = getResources().getConfiguration().orientation;
+
 		setContentView(R.layout.activity_main);
 		Intent intent = this.getIntent();    //获得当前的Intent
  		Bundle bundle = intent.getExtras();  //获得全部数据
@@ -222,7 +227,18 @@ public class MainActivity extends Activity {
 		viewList = new ArrayList<View>();
 
 		LayoutInflater lf = getLayoutInflater().from(this);
-		view1 = lf.inflate(R.layout.layout_guage, null);
+		if ( mCurrentOrientation == Configuration.ORIENTATION_PORTRAIT ) {
+			// If current screen is portrait
+			Log.i("info", "portrait"); // 竖屏
+			//setContentView(R.layout.mainP);
+			view1 = lf.inflate(R.layout.layout_guage, null);
+		} else if ( mCurrentOrientation == Configuration.ORIENTATION_LANDSCAPE ) {
+			//If current screen is landscape
+			Log.i("info", "landscape"); // 横屏
+			//setContentView(R.layout.mainL);
+			view1 = lf.inflate(R.layout.layout_guage_landscape, null);
+		}
+
 		view2 = lf.inflate(R.layout.layout_record, null);
 		view3 = lf.inflate(R.layout.layout_leader, null);
 
