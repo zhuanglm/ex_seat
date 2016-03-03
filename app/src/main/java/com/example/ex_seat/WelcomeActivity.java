@@ -38,13 +38,13 @@ public class WelcomeActivity extends Activity {
 		loginButton = (LoginButton)findViewById(R.id.login_button);
 	    loginButton.setReadPermissions(Arrays.asList("user_friends","email", "user_photos","user_location","user_birthday", "public_profile"));
 	    callbackManager = CallbackManager.Factory.create();
-	    
+
 	    /*accessTokenTracker = new AccessTokenTracker() {
 	        @Override
 	        protected void onCurrentAccessTokenChanged(
 	            AccessToken oldAccessToken,
 	            AccessToken currentAccessToken) {
-	                // Set the access token using 
+	                // Set the access token using
 	                // currentAccessToken when it's loaded or set.
 	        }
 	    };*/
@@ -56,7 +56,7 @@ public class WelcomeActivity extends Activity {
 			DataDef.profile = Profile.getCurrentProfile();
 		}
 
-	    
+
 	 // Callback registration
 	    loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 	        @Override
@@ -97,14 +97,14 @@ public class WelcomeActivity extends Activity {
 	            // App code
 	        }
 	    });
-		
+
 		Button m_Startbtn = (Button)findViewById(R.id.button1);
 		m_Startbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
                 Toast.makeText(getApplicationContext(),"Clicked",Toast.LENGTH_SHORT).show();
-                
+
                 Intent intent = new Intent();
 				intent.setClass(WelcomeActivity.this, MainActivity.class);  //从IntentActivity跳转到SubActivity
 				intent.putExtra("name", "raymond");  //放入数据

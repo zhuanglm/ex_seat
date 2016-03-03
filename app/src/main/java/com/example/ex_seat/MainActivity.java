@@ -90,13 +90,11 @@ public class MainActivity extends Activity {
 	private Matrix matrix = new Matrix();
 	private ListView m_listviewData;
 
-	private static final String DB_NAME = "ex_seat.db"; //数据库名称
-	private static final int version = 1; //数据库版本
-	private DatabaseHelper database;
+	public DatabaseHelper database;
 	private SQLiteDatabase db;
 	private Cursor db_cursor;
 	private SimpleDateFormat sDateFormat;
-	private SimpleCursorAdapter simple_adapter;
+	public SimpleCursorAdapter simple_adapter;
 	private int mCurrentOrientation;
 
 	private ProfilePictureView profilePictureView;
@@ -221,7 +219,7 @@ public class MainActivity extends Activity {
 		//actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setTitle(R.string.app_page1);
 
-		database = new DatabaseHelper(this,DB_NAME,null,version);
+		database = new DatabaseHelper(this,DataDef.DB_NAME,null,DataDef.version);
 		db = database.getReadableDatabase();
 
 		viewList = new ArrayList<View>();
@@ -240,7 +238,7 @@ public class MainActivity extends Activity {
 		}
 
 		view2 = lf.inflate(R.layout.layout_record, null);
-		view3 = lf.inflate(R.layout.layout_leader, null);
+		view3 = lf.inflate(R.layout.layout_profile, null);
 
 		//2nd page
 		m_listviewData = (ListView) view2.findViewById(R.id.listView_data);
@@ -255,7 +253,7 @@ public class MainActivity extends Activity {
 		text_username = (TextView) view3.findViewById(R.id.text_username);
 		final TextView text_email = (TextView) view3.findViewById(R.id.textEmail);
 		final TextView text_city = (TextView) view3.findViewById(R.id.textLocation);
-		text_username = (TextView) view3.findViewById(R.id.text_username);
+
 		if(DataDef.accessToken != null) {
 			//text_username.setText(DataDef.profile.getName());
 			profilePictureView = (ProfilePictureView) view3.findViewById(R.id.profilePicture);

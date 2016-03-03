@@ -16,4 +16,7 @@ public class DataDef {
 
 	public static AccessToken accessToken;
 	public static Profile profile;
+
+	public static final String DB_NAME = "ex_seat.db"; //数据库名称
+	public static final int version = 1; //数据库版本
 }
