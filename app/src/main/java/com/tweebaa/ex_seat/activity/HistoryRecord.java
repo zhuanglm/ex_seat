@@ -1,4 +1,4 @@
-package com.example.ex_seat;
+package com.tweebaa.ex_seat.activity;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+
+import com.tweebaa.ex_seat.model.DatabaseHelper;
 
 import java.text.SimpleDateFormat;
 

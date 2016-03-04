@@ -1,4 +1,4 @@
-package com.example.ex_seat;
+package com.tweebaa.ex_seat.model;
 
 
 public class HighlightCR {

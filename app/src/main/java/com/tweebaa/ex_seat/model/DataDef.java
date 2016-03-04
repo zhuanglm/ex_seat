@@ -1,4 +1,4 @@
-package com.example.ex_seat;
+package com.tweebaa.ex_seat.model;
 
 import com.facebook.AccessToken;
 import com.facebook.Profile;

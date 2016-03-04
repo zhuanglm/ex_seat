@@ -1,4 +1,4 @@
-package com.example.ex_seat;
+package com.tweebaa.ex_seat.model;
 
 /**
  * Created by Zhuang on 2016-02-23.
