@@ -55,7 +55,7 @@ ADDED from AndroidManifest.xml:19:9
 		ADDED from AndroidManifest.xml:21:13
 	android:name
 		ADDED from AndroidManifest.xml:20:13
-activity#com.example.ex_seat.WelcomeActivity
+activity#com.tweebaa.ex_seat.activity.WelcomeActivity
 ADDED from AndroidManifest.xml:22:9
 	android:label
 		ADDED from AndroidManifest.xml:24:13
@@ -71,7 +71,7 @@ category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:28:17
 	android:name
 		ADDED from AndroidManifest.xml:28:27
-activity#com.example.ex_seat.MainActivity
+activity#com.tweebaa.ex_seat.activity.MainActivity
 ADDED from AndroidManifest.xml:31:9
 	android:name
 		ADDED from AndroidManifest.xml:31:19

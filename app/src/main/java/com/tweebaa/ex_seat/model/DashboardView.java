@@ -11,7 +11,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
-
+import com.example.ex_seat.R;
 import java.util.List;
 
 public class DashboardView extends View {

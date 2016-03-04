@@ -4,6 +4,7 @@ import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.List;
 /**
@@ -39,14 +40,14 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     //销毁Item
     @Override
-    public void destroyItem(View view, int position, Object object)
+    public void destroyItem(ViewGroup view, int position, Object object)
     {
         ((ViewPager) view).removeView(viewLists.get(position));
     }
 
     //实例化Item
     @Override
-    public Object instantiateItem(View view, int position)
+    public Object instantiateItem(ViewGroup view, int position)
     {
         ((ViewPager) view).addView(viewLists.get(position), 0);
         return viewLists.get(position);

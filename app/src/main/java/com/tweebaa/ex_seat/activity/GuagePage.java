@@ -16,11 +16,18 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.ex_seat.R;
+import com.tweebaa.ex_seat.model.DashboardView;
+import com.tweebaa.ex_seat.model.DataCollector;
+import com.tweebaa.ex_seat.model.DataDef;
+import com.tweebaa.ex_seat.model.DataGraph;
+import com.tweebaa.ex_seat.model.DatabaseHelper;
+import com.tweebaa.ex_seat.model.HighlightCR;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
-
 /**
  * Created by Zhuang on 2016-03-03.
  */

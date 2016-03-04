@@ -38,13 +38,17 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
+import com.example.ex_seat.R;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.widget.ProfilePictureView;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.tweebaa.ex_seat.adapter.ViewPagerAdapter;
+import com.tweebaa.ex_seat.model.DashboardView;
+import com.tweebaa.ex_seat.model.DataCollector;
+import com.tweebaa.ex_seat.model.DataDef;
+import com.tweebaa.ex_seat.model.DataGraph;
+import com.tweebaa.ex_seat.model.DatabaseHelper;
+import com.tweebaa.ex_seat.model.HighlightCR;
+import com.tweebaa.ex_seat.model.HttpConnect;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -238,7 +242,7 @@ public class MainActivity extends Activity {
 		}
 
 		view2 = lf.inflate(R.layout.layout_record, null);
-		view3 = lf.inflate(R.layout.layout_profile, null);
+		view3 = lf.inflate(R.layout.layout_fragment_profile, null);
 
 		//2nd page
 		m_listviewData = (ListView) view2.findViewById(R.id.listView_data);
@@ -250,7 +254,7 @@ public class MainActivity extends Activity {
 		m_listviewData.setAdapter(simple_adapter);
 
 		//3rd page
-		text_username = (TextView) view3.findViewById(R.id.text_username);
+		/*text_username = (TextView) view3.findViewById(R.id.text_username);
 		final TextView text_email = (TextView) view3.findViewById(R.id.textEmail);
 		final TextView text_city = (TextView) view3.findViewById(R.id.textLocation);
 
@@ -287,7 +291,7 @@ public class MainActivity extends Activity {
 			parameters.putString("fields", "id,name,email,location,gender,birthday");
 			request.setParameters(parameters);
 			request.executeAsync();
-		}
+		}*/
 
 		imageView = (ImageView) findViewById(R.id.cursor);
 		textView1 = (TextView) findViewById(R.id.textView1);
