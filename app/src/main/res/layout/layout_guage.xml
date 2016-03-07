@@ -23,7 +23,7 @@
             android:textSize="20sp" />
 
         <com.tweebaa.ex_seat.model.DashboardView
-            android:id="@+id/dashboardView1"
+            android:id="@+id/dashboardView_rpm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

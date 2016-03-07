@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -48,6 +49,16 @@
             android:background="#0E1A44"
             android:gravity="center"
             android:text="Profile"
+            android:textColor="@drawable/white"
+            />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="#0E1A44"
+            android:gravity="center"
+            android:text="Board"
             android:textColor="@drawable/white"
             />
     </LinearLayout>

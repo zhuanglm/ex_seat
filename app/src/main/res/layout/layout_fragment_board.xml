@@ -3,10 +3,10 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment android:name="com.tweebaa.ex_seat.activity.ProfilePage"
-        android:id="@+id/profile"
+    <fragment android:name="com.tweebaa.ex_seat.activity.LeaderBoard"
+        android:id="@+id/list"
         android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="0dp" />
+        android:layout_height="0dp"/>
 
 </LinearLayout>

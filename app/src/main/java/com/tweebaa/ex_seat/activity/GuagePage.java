@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.ex_seat.R;
+import com.tweebaa.ex_seat.R;
 import com.tweebaa.ex_seat.model.DashboardView;
 import com.tweebaa.ex_seat.model.DataCollector;
 import com.tweebaa.ex_seat.model.DataDef;

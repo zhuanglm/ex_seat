@@ -11,7 +11,7 @@ public class DataDef {
 	public static int msgTYPE_NO = 0;
 	public static List<Integer> dataFromDev = new ArrayList<Integer>();
 	public static int MaxDataSize=0;
-	public static int WinTabNum=3;
+	public static int WinTabNum=4;
 	public static int TimeInterver_BT=300;
 
 	public static AccessToken accessToken;

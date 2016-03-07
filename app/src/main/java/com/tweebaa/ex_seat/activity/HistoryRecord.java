@@ -13,7 +13,7 @@ import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-import com.example.ex_seat.R;
+import com.tweebaa.ex_seat.R;
 import com.tweebaa.ex_seat.model.DataDef;
 import com.tweebaa.ex_seat.model.DatabaseHelper;
 

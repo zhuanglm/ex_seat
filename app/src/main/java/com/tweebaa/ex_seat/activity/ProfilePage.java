@@ -9,8 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.ex_seat.R;
+import com.tweebaa.ex_seat.R;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.widget.ProfilePictureView;
+import com.tweebaa.ex_seat.model.DataDef;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Zhuang on 2016-03-03.
@@ -44,7 +50,7 @@ public class ProfilePage extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.layout_profile, container, false);
 
-        /*text_username = (TextView) view.findViewById(R.id.text_username);
+        text_username = (TextView) view.findViewById(R.id.text_username);
         final TextView text_email = (TextView) view.findViewById(R.id.textEmail);
         final TextView text_city = (TextView) view.findViewById(R.id.textLocation);
 
@@ -81,7 +87,7 @@ public class ProfilePage extends Fragment {
             parameters.putString("fields", "id,name,email,location,gender,birthday");
             request.setParameters(parameters);
             request.executeAsync();
-        }*/
+        }
         return view;
     }
 

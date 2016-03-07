@@ -27,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
@@ -38,9 +39,8 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ex_seat.R;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.widget.ProfilePictureView;
+import com.tweebaa.ex_seat.R;
 import com.tweebaa.ex_seat.adapter.ViewPagerAdapter;
 import com.tweebaa.ex_seat.model.DashboardView;
 import com.tweebaa.ex_seat.model.DataCollector;
@@ -60,6 +60,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Set;
 import java.util.TimeZone;
@@ -69,7 +70,6 @@ public class MainActivity extends Activity {
 
 	public MyHandler handler = new MyHandler(this);
 	StringBuffer result = new StringBuffer();
-	String sR = "abc";
 	static Context contextAct;
 	TextView hellotv;
 	private ActionBar actionBar;
@@ -77,37 +77,24 @@ public class MainActivity extends Activity {
 	private DashboardView dashboardView1;
 	private static boolean m_bStopFlag = false;
 	private static boolean m_bBTStartFlag = true;
-	private View view1, view2, view3;
-	private List<View> viewList;
-	private ViewPagerAdapter viewPager_adapter;
 	private ViewPager viewPager;
 	Button BTSwitchbtn;
 	Button BKSwitchbtn;
 	private int currentItem,offSet,bmWidth;
 	private Animation animation;
-	private Bitmap view_cursor;
 	private ImageView imageView;
-	private TextView textView1;
-	private TextView textView2;
-	private TextView textView3;
-	private TextView text_username;
 	private Matrix matrix = new Matrix();
-	private ListView m_listviewData;
-
 	public DatabaseHelper database;
 	private SQLiteDatabase db;
 	private Cursor db_cursor;
 	private SimpleDateFormat sDateFormat;
 	public SimpleCursorAdapter simple_adapter;
-	private int mCurrentOrientation;
-
-	private ProfilePictureView profilePictureView;
 
 	public static class MyHandler extends Handler {
 	    private final WeakReference<MainActivity> mActivity;
 	 
 	    private MyHandler(MainActivity activity) {
-	      mActivity = new WeakReference<MainActivity>(activity);
+	      mActivity = new WeakReference<>(activity);
 	    }
 	 
 	    @Override
@@ -122,7 +109,7 @@ public class MainActivity extends Activity {
 					case 1:
 						//完成主界面更新,拿到数据
 						String data = (String)msg.obj;
-						String value = (String) activity.hellotv.getText();
+						//String value = (String) activity.hellotv.getText();
 						/*int nSum = Integer.valueOf(data);
 						if(isNumeric(value))
 						{
@@ -212,40 +199,44 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mCurrentOrientation = getResources().getConfiguration().orientation;
+		int mCurrentOrientation = getResources().getConfiguration().orientation;
 
 		setContentView(R.layout.activity_main);
-		Intent intent = this.getIntent();    //获得当前的Intent
- 		Bundle bundle = intent.getExtras();  //获得全部数据
-		String value = bundle.getString("name");  //获得名为name的值
+		//Intent intent = this.getIntent();    //获得当前的Intent
+ 		//Bundle bundle = intent.getExtras();  //获得全部数据
+		//String value = bundle.getString("name");  //获得名为name的值
 
 		actionBar=getActionBar();
 		//actionBar.setDisplayShowTitleEnabled(false);
-		actionBar.setTitle(R.string.app_page1);
+		if(actionBar!=null){
+			actionBar.setTitle(R.string.app_page1);
+		}
 
 		database = new DatabaseHelper(this,DataDef.DB_NAME,null,DataDef.version);
 		db = database.getReadableDatabase();
 
-		viewList = new ArrayList<View>();
+		List<View> viewList = new ArrayList<>();
 
-		LayoutInflater lf = getLayoutInflater().from(this);
+		LayoutInflater lf = LayoutInflater.from(this);
+		View view1=null;
 		if ( mCurrentOrientation == Configuration.ORIENTATION_PORTRAIT ) {
 			// If current screen is portrait
 			Log.i("info", "portrait"); // 竖屏
 			//setContentView(R.layout.mainP);
-			view1 = lf.inflate(R.layout.layout_guage, null);
+			view1 = lf.inflate(R.layout.layout_guage, (ViewGroup)null);
 		} else if ( mCurrentOrientation == Configuration.ORIENTATION_LANDSCAPE ) {
 			//If current screen is landscape
 			Log.i("info", "landscape"); // 横屏
 			//setContentView(R.layout.mainL);
-			view1 = lf.inflate(R.layout.layout_guage_landscape, null);
+			view1 = lf.inflate(R.layout.layout_guage_landscape, (ViewGroup)null);
 		}
 
-		view2 = lf.inflate(R.layout.layout_record, null);
-		view3 = lf.inflate(R.layout.layout_fragment_profile, null);
+		View view2 = lf.inflate(R.layout.layout_record, (ViewGroup)null);
+		View view3 = lf.inflate(R.layout.layout_fragment_profile, (ViewGroup)null);
+		View view4 = lf.inflate(R.layout.layout_fragment_board, (ViewGroup)null);
 
 		//2nd page
-		m_listviewData = (ListView) view2.findViewById(R.id.listView_data);
+		ListView m_listviewData = (ListView) view2.findViewById(R.id.listView_data);
 
 		db_cursor = db.query("data", new String[]{"_id","max", "date", "duration", "avg"}, null, null, null, null, null);
 		simple_adapter = new SimpleCursorAdapter(view2.getContext(), R.layout.data_item, db_cursor,
@@ -253,58 +244,20 @@ public class MainActivity extends Activity {
 				CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 		m_listviewData.setAdapter(simple_adapter);
 
-		//3rd page
-		/*text_username = (TextView) view3.findViewById(R.id.text_username);
-		final TextView text_email = (TextView) view3.findViewById(R.id.textEmail);
-		final TextView text_city = (TextView) view3.findViewById(R.id.textLocation);
-
-		if(DataDef.accessToken != null) {
-			//text_username.setText(DataDef.profile.getName());
-			profilePictureView = (ProfilePictureView) view3.findViewById(R.id.profilePicture);
-			//profilePictureView.setProfileId(DataDef.profile.getId());
-
-			GraphRequest request = GraphRequest.newMeRequest(
-					DataDef.accessToken, new GraphRequest.GraphJSONObjectCallback() {
-						@Override
-						public void onCompleted(JSONObject me, GraphResponse response) {
-							if (response.getError() != null) {
-								// handle error
-							} else {
-								String email = me.optString("email");
-								String name = me.optString("name");
-								String id = me.optString("id");
-								String birthday = me.optString("birthday");
-
-								try{
-									String location = me.getJSONObject("location").optString("name");
-									text_city.setText(location);
-								}catch (JSONException e) {
-									e.printStackTrace();
-								}
-								text_username.setText(name);
-								text_email.setText(email);
-								profilePictureView.setProfileId(id);
-							}
-						}
-					});
-			Bundle parameters = new Bundle();
-			parameters.putString("fields", "id,name,email,location,gender,birthday");
-			request.setParameters(parameters);
-			request.executeAsync();
-		}*/
-
 		imageView = (ImageView) findViewById(R.id.cursor);
-		textView1 = (TextView) findViewById(R.id.textView1);
-		textView2 = (TextView) findViewById(R.id.textView2);
-		textView3 = (TextView) findViewById(R.id.textView3);
+		TextView textView1 = (TextView) findViewById(R.id.textView1);
+		TextView textView2 = (TextView) findViewById(R.id.textView2);
+		TextView textView3 = (TextView) findViewById(R.id.textView3);
+		TextView textView4 = (TextView) findViewById(R.id.textView4);
 
 		viewList.add(view1);
 		viewList.add(view2);
 		viewList.add(view3);
+		viewList.add(view4);
 
 		initeCursor();
 
-		viewPager_adapter = new ViewPagerAdapter(viewList);
+		ViewPagerAdapter viewPager_adapter = new ViewPagerAdapter(viewList);
 		viewPager = (ViewPager) findViewById(R.id.viewPager);
 		viewPager.setAdapter(viewPager_adapter);
 
@@ -315,6 +268,7 @@ public class MainActivity extends Activity {
 			// 顶部的imageView是通过animation缓慢的滑动
 			@Override
 			public void onPageSelected(int arg0) {
+				int nInterv;
 				switch (arg0) {
 					case 0:
 						if (currentItem == 1) {
@@ -324,7 +278,12 @@ public class MainActivity extends Activity {
 							animation = new TranslateAnimation(offSet * 4 + 2
 									* bmWidth, 0, 0, 0);
 						}
+						else if (currentItem == 3) {
+							animation = new TranslateAnimation(offSet * 6 + 3
+									* bmWidth, 0, 0, 0);
+						}
 						actionBar.setTitle(R.string.app_page1);
+
 						break;
 					case 1:
 						if (currentItem == 0) {
@@ -333,9 +292,12 @@ public class MainActivity extends Activity {
 						} else if (currentItem == 2) {
 							animation = new TranslateAnimation(4 * offSet + 2
 									* bmWidth, offSet * 2 + bmWidth, 0, 0);
+						} else if (currentItem == 3) {
+							animation = new TranslateAnimation(6 * offSet + 3 * bmWidth, offSet * 2 + bmWidth, 0, 0);
 						}
 
 						actionBar.setTitle(R.string.app_page2);
+
 						break;
 					case 2:
 						if (currentItem == 0) {
@@ -346,11 +308,32 @@ public class MainActivity extends Activity {
 									offSet * 2 + bmWidth, 4 * offSet + 2 * bmWidth,
 									0, 0);
 						}
+						else if (currentItem == 3) {
+							animation = new TranslateAnimation(
+									6 * offSet + 3 * bmWidth, 4 * offSet + 2 * bmWidth,
+									0, 0);
+						}
 						actionBar.setTitle(R.string.app_page3);
 						break;
+					case 3:
+						if (currentItem == 0) {
+							animation = new TranslateAnimation(0, 6 * offSet + 3 * bmWidth, 0, 0);
+						} else if (currentItem == 1) {
+							animation = new TranslateAnimation(offSet * 2
+									+ bmWidth, 6 * offSet + 3 * bmWidth, 0, 0);
+						} else if (currentItem == 2) {
+							animation = new TranslateAnimation(
+									4 * offSet + 2 * bmWidth, 6 * offSet + 3 * bmWidth,
+									0, 0);
+						}
+
+						actionBar.setTitle(R.string.app_page4);
+						break;
 				}
+				nInterv=Math.abs(currentItem-arg0);
 				currentItem = arg0;
-				animation.setDuration(150); // 光标滑动速度
+
+				animation.setDuration(150*nInterv); // 光标滑动速度
 				animation.setFillAfter(true);
 				imageView.startAnimation(animation);
 			}
@@ -387,11 +370,21 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		dashboardView1 = (DashboardView) view1.findViewById(R.id.dashboardView1);
-		List<HighlightCR> highlight1 = new ArrayList<HighlightCR>();
-        highlight1.add(new HighlightCR(210, 60, Color.parseColor("#03A9F4")));
-        highlight1.add(new HighlightCR(270, 60, Color.parseColor("#FFA000")));
-        dashboardView1.setStripeHighlightColorAndRange(highlight1);
+		textView4.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				viewPager.setCurrentItem(3);
+			}
+		});
+
+		dashboardView1 = (DashboardView) view1.findViewById(R.id.dashboardView_rpm);
+		if(dashboardView1!=null){
+			List<HighlightCR> highlight1 = new ArrayList<HighlightCR>();
+			highlight1.add(new HighlightCR(210, 60, Color.parseColor("#03A9F4")));
+			highlight1.add(new HighlightCR(270, 60, Color.parseColor("#FFA000")));
+			dashboardView1.setStripeHighlightColorAndRange(highlight1);
+		}
+
 		
 		LinearLayout layout = (LinearLayout)view1.findViewById(R.id.chart_layout);
 		drawView = new DataGraph(this);//创建自定义的控件
@@ -425,14 +418,14 @@ public class MainActivity extends Activity {
 	 	            	handler.removeCallbacks(runnable_long);
 	 	            	m_bStopFlag = true;
 
-						sDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+						sDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss", Locale.getDefault());
 						String date = sDateFormat.format(new java.util.Date());
 						//Toast.makeText(getApplicationContext(),Integer.toString(DataCollector.m_nTimes*DataDef.TimeInterver_BT/1000),Toast.LENGTH_SHORT).show();
 						//Toast.makeText(getApplicationContext(),date,Toast.LENGTH_SHORT).show();
 						ContentValues cv = new ContentValues();
 						cv.put("date", date);
 						long  ms = DataCollector.m_nTimes*DataDef.TimeInterver_BT ;//毫秒数
-						SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");//初始化Formatter的转换格式。
+						SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss",Locale.getDefault());//初始化Formatter的转换格式。
 						formatter.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
 						String hms = formatter.format(ms);
 						//cv.put("duration",Integer.toString(DataCollector.m_nTimes*DataDef.TimeInterver_BT / 1000));
@@ -579,7 +572,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void initeCursor() {
-		view_cursor = BitmapFactory.decodeResource(getResources(), R.drawable.cursor);
+		Bitmap view_cursor = BitmapFactory.decodeResource(getResources(), R.drawable.cursor);
 		bmWidth = view_cursor.getWidth();
 
 		DisplayMetrics dm;

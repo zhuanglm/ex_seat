@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <com.facebook.login.widget.ProfilePictureView
+      android:id="@+id/profilePicture"
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content"
+      android:gravity="center_horizontal"
+      android:layout_marginBottom="10dp"
+      facebook:com_facebook_preset_size="large"
+      android:layout_gravity="center_horizontal"
+      android:paddingTop="20dp" />
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/scrollView_info"
+      android:layout_gravity="center_horizontal"
+      android:scrollIndicators="right"
+      android:visibility="visible" >
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="NoName"
+          android:id="@+id/text_username"
+          android:layout_gravity="bottom|center_horizontal"
+          android:textSize="24dp" />
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="email"
+          android:id="@+id/textEmail"
+          android:layout_gravity="center_horizontal"
+          android:textSize="18dp"/>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="city"
+          android:id="@+id/textLocation"
+          android:layout_gravity="center_horizontal"
+          android:textSize="18dp"/>
+    </LinearLayout>
+  </ScrollView>
+
+</LinearLayout>

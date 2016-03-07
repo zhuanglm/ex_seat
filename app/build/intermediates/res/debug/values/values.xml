@@ -242,12 +242,14 @@
     <string name="app_page1">Workout</string>
     <string name="app_page2">History</string>
     <string name="app_page3">Profile</string>
+    <string name="app_page4">LeaderBoard</string>
     <string name="button_name1">Stop Calculating</string>
     <string name="button_name2">Start Calculating</string>
     <string name="button_name3">Connect Bluetooth</string>
     <string name="button_name4">Disconnect Bluetooth</string>
     <string name="button_send">Say something</string>
     <string name="button_start">Start</string>
+    <string name="calory">Calories Today</string>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.10.0/res/values/values.xml -->
     <eat-comment/>
     <string name="com_facebook_device_auth_instructions">Visit &lt;b>facebook.com/device&lt;/b>&lt;br />on your smartphone or computer&lt;br />and enter this code</string>
