@@ -1,6 +1,5 @@
 package com.tweebaa.ex_seat.activity;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -20,8 +19,7 @@ import java.util.ArrayList;
  * Created by Zhuang on 2016-03-07.
  */
 public class LeaderBoard extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    private Activity mAct;
-    private Context mContext;
+
     private SwipeRefreshLayout mSwipeLayout;
     private ListView mListView;
     private ArrayList<String> list = new ArrayList<String>();
@@ -29,8 +27,7 @@ public class LeaderBoard extends Fragment implements SwipeRefreshLayout.OnRefres
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mAct = getActivity();
-        mContext = context;
+
     }
 
     private ArrayList<String> getData() {
@@ -57,8 +54,7 @@ public class LeaderBoard extends Fragment implements SwipeRefreshLayout.OnRefres
         super.onCreate(savedInstanceState);
 
         //Bundle bundle = getArguments();
-        //bundle.getString("EVENT");
-        //setListAdapter(adapter);
+        //if (bundle != null) bundle.getString("EVENT");
 
     }
 
@@ -68,7 +64,7 @@ public class LeaderBoard extends Fragment implements SwipeRefreshLayout.OnRefres
         View view = inflater.inflate(R.layout.layout_board, container, false);
 
         mListView = (ListView) view.findViewById(R.id.list_leading);
-        mListView.setAdapter(new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1,getData()));
+        mListView.setAdapter(new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1,getData()));
 
         mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
         mSwipeLayout.setOnRefreshListener(this);

@@ -25,4 +25,18 @@
         </attr>
         <attr name="bgColor" format="color"/> <!--背景颜色-->
     </declare-styleable>
+
+    <declare-styleable name="BatteryView">
+        <attr name="minBattery" format="integer"/> <!--最小值-->
+        <attr name="maxBattery" format="integer"/> <!--最大值-->
+        <attr name="currentValue" format="float"/> <!--实时值-->
+        <attr name="batteryWidth" format="dimension"/> <!--直径-->
+        <attr name="batteryLength" format="dimension"/> <!--长度-->
+        <attr name="emptyColor" format="color"/> <!--背景颜色-->
+        <attr name="stripeColor" format="color"/> <!--弧度颜色-->
+        <attr name="batteryMode" > <!--色条显示模式-->
+            <enum name="vertical" value="1"/>
+            <enum name="horizontal" value="2"/>
+        </attr>
+    </declare-styleable>
 </resources>

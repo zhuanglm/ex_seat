@@ -14,13 +14,34 @@
         android:layout_marginTop="5dp"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/textView_http"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/hello_world"
-            android:textSize="20sp" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView_http"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/hello_world"
+                android:textSize="20sp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <com.tweebaa.ex_seat.model.BatteryView
+                android:id="@+id/batteryView"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                app:batteryMode="horizontal"
+                app:maxValue="100"
+                app:currentValue="70"
+                app:realTimeValue="100"
+                app:batteryWidth="15dp"
+                app:batteryLength="30dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
 
         <com.tweebaa.ex_seat.model.DashboardView
             android:id="@+id/dashboardView_rpm"
@@ -80,5 +101,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true">
     </LinearLayout>
+
 
 </LinearLayout>

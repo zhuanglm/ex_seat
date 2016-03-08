@@ -268,7 +268,7 @@ public class MainActivity extends Activity {
 			// 顶部的imageView是通过animation缓慢的滑动
 			@Override
 			public void onPageSelected(int arg0) {
-				int nInterv;
+
 				switch (arg0) {
 					case 0:
 						if (currentItem == 1) {
@@ -330,10 +330,9 @@ public class MainActivity extends Activity {
 						actionBar.setTitle(R.string.app_page4);
 						break;
 				}
-				nInterv=Math.abs(currentItem-arg0);
-				currentItem = arg0;
 
-				animation.setDuration(150*nInterv); // 光标滑动速度
+				currentItem = arg0;
+				animation.setDuration(150); // 光标滑动速度
 				animation.setFillAfter(true);
 				imageView.startAnimation(animation);
 			}
