@@ -42,6 +42,7 @@ import android.widget.Toast;
 import com.facebook.appevents.AppEventsLogger;
 import com.tweebaa.ex_seat.R;
 import com.tweebaa.ex_seat.adapter.ViewPagerAdapter;
+import com.tweebaa.ex_seat.model.BatteryView;
 import com.tweebaa.ex_seat.model.DashboardView;
 import com.tweebaa.ex_seat.model.DataCollector;
 import com.tweebaa.ex_seat.model.DataDef;
@@ -89,6 +90,7 @@ public class MainActivity extends Activity {
 	private Cursor db_cursor;
 	private SimpleDateFormat sDateFormat;
 	public SimpleCursorAdapter simple_adapter;
+	private BatteryView m_SensorPower;
 
 	public static class MyHandler extends Handler {
 	    private final WeakReference<MainActivity> mActivity;
@@ -117,6 +119,7 @@ public class MainActivity extends Activity {
 						}
 						activity.hellotv.setText(Integer.toString(nSum));*/
 						activity.hellotv.setText(data);
+						activity.m_SensorPower.setValue(DataCollector.m_nAverageRPM);
 						//Toast.makeText(contextAct,data,Toast.LENGTH_SHORT).show();
 						break;
 					case 0x1234: 
@@ -277,8 +280,7 @@ public class MainActivity extends Activity {
 						} else if (currentItem == 2) {
 							animation = new TranslateAnimation(offSet * 4 + 2
 									* bmWidth, 0, 0, 0);
-						}
-						else if (currentItem == 3) {
+						} else if (currentItem == 3) {
 							animation = new TranslateAnimation(offSet * 6 + 3
 									* bmWidth, 0, 0, 0);
 						}
@@ -307,8 +309,7 @@ public class MainActivity extends Activity {
 							animation = new TranslateAnimation(
 									offSet * 2 + bmWidth, 4 * offSet + 2 * bmWidth,
 									0, 0);
-						}
-						else if (currentItem == 3) {
+						} else if (currentItem == 3) {
 							animation = new TranslateAnimation(
 									6 * offSet + 3 * bmWidth, 4 * offSet + 2 * bmWidth,
 									0, 0);
@@ -383,7 +384,7 @@ public class MainActivity extends Activity {
 			highlight1.add(new HighlightCR(270, 60, Color.parseColor("#FFA000")));
 			dashboardView1.setStripeHighlightColorAndRange(highlight1);
 		}
-
+		m_SensorPower = (BatteryView) view1.findViewById(R.id.battery);
 		
 		LinearLayout layout = (LinearLayout)view1.findViewById(R.id.chart_layout);
 		drawView = new DataGraph(this);//创建自定义的控件

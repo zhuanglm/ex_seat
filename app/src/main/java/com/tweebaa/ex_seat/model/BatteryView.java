@@ -138,6 +138,8 @@ public class BatteryView extends View {
         mPower = value;
         if (mPower < 0) {
             mPower = 0;
+        }else if(mPower>mMaxValue){
+            mPower = mMaxValue;
         }
 
         if(mModeType==2) {    //horizontal

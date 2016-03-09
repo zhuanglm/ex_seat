@@ -30,12 +30,12 @@
                 android:gravity="center" />
 
             <com.tweebaa.ex_seat.model.BatteryView
-                android:id="@+id/batteryView"
+                android:id="@+id/battery"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 app:batteryMode="horizontal"
-                app:maxValue="100"
-                app:currentValue="70"
+                app:maxBattery="800"
+                app:currentValue="700"
                 app:realTimeValue="100"
                 app:batteryWidth="15dp"
                 app:batteryLength="30dp"
