@@ -37,9 +37,6 @@ public class WelcomeActivity extends AppCompatActivity  {
 		FacebookSdk.sdkInitialize(getApplicationContext());
 		setContentView(R.layout.activity_welcome);
 
-		android.support.v7.app.ActionBar mActionBar = getSupportActionBar();
-		mActionBar.hide();
-		
 		mFacebookLoginButton = (LoginButton)findViewById(R.id.login_with_facebook);
 		mFacebookLoginButton.setReadPermissions(Arrays.asList("user_friends", "email", "user_photos", "user_location", "user_birthday", "public_profile"));
 		mFacebookCallbackManager = CallbackManager.Factory.create();
@@ -114,9 +111,7 @@ public class WelcomeActivity extends AppCompatActivity  {
 				m_Signinbtn.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-
 						//Toast.makeText(getApplicationContext(),"Clicked", Toast.LENGTH_SHORT).show();
-
 						Intent intent = new Intent();
 						//intent.setClass(WelcomeActivity.this, MainActivity.class);  //从IntentActivity跳转到SubActivity
 						intent.setClass(WelcomeActivity.this, LoginActivity.class);

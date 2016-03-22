@@ -73,6 +73,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_email"
+
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
                         android:singleLine="true" />
@@ -135,12 +136,12 @@
                     android:textColor="@android:color/black" />
 
                 <Button
-                    android:id="@+id/ign_up_button"
+                    android:id="@+id/sign_up_button"
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
-                    android:text="@string/button_signup"
+                    android:text="@string/button_join"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:background="@drawable/btnstyle"

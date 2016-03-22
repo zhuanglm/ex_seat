@@ -545,9 +545,18 @@
     <integer name="abc_config_activityShortDur">150</integer>
     <integer name="abc_max_action_buttons">2</integer>
     <integer name="cancel_button_image_alpha">127</integer>
+    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/src/main/res/values/integers.xml -->
+    <eat-comment/>
+    <integer name="card_flip_time_full">300</integer>
+    <integer name="card_flip_time_half">150</integer>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/res/values/values.xml -->
     <eat-comment/>
     <integer name="design_snackbar_text_max_lines">2</integer>
+    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/src/main/res/values/integers.xml -->
+    <eat-comment/>
+    <integer name="half_slide_up_down_duration">150</integer>
+    <integer name="slide_up_down_duration">200</integer>
+    <integer name="slide_up_down_final_value">150</integer>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
     <eat-comment/>
     <integer name="status_bar_notification_info_maxnum">999</integer>
@@ -595,13 +604,14 @@
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="button_forgot">Forgot Password?</string>
+    <string name="button_join">Join Now</string>
     <string name="button_login">Tweebaa User</string>
     <string name="button_name1">Stop Calculating</string>
     <string name="button_name2">Start Calculating</string>
     <string name="button_name3">Connect Bluetooth</string>
     <string name="button_name4">Disconnect Bluetooth</string>
     <string name="button_send">Say something</string>
-    <string name="button_signup">Join Now</string>
+    <string name="button_signup">Sign Up</string>
     <string name="button_start">Start</string>
     <string name="calory">Calories Today</string>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/res/values/values.xml -->
@@ -649,7 +659,9 @@
         completions."
     </string>
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_repeatpwd">Repeat Password</string>
+    <string name="prompt_user">User Name</string>
     <string name="r_min">×100 r/Min</string>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
     <eat-comment/>
@@ -661,7 +673,7 @@
     <eat-comment/>
     <style name="AcBar_titleStyle">
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/royalblue</item>
     </style>
     <style name="ActionBar.Solid.My_actionbar_style" parent="@style/Widget.AppCompat.ActionBar.Solid">
 
@@ -700,6 +712,7 @@
         <item name="actionBarStyle">@style/ActionBar.Solid.My_actionbar_style</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_my_actionbar_style</item>
         <item name="windowActionBar">true</item>
+
     </style>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
     <eat-comment/>

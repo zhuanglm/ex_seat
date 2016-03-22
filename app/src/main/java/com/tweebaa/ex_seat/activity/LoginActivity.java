@@ -3,6 +3,7 @@ package com.tweebaa.ex_seat.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.FragmentManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -54,7 +55,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-
+    private FragmentManager mFragmentManager;
 
 
     @Override
@@ -96,8 +97,31 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        Button mSignupButton = (Button) findViewById(R.id.sign_up_button);
+        mSignupButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragmentManager = getFragmentManager();
+                android.app.FragmentTransaction trans = mFragmentManager.beginTransaction();
+                trans.setCustomAnimations(R.anim.glide_fragment_horizontal_in,R.anim.glide_fragment_horizontal_out);
+                trans.add(R.id.popup_container, SignupFragment.newInstance("", ""), "SignupFragment");
+                trans.addToBackStack("SignupFragment");
+
+                trans.commit();
+            }
+        });
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(mFragmentManager.getBackStackEntryCount() != 0) {
+            mFragmentManager.popBackStack();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
