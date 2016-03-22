@@ -27,7 +27,8 @@
                 android:text="@string/hello_world"
                 android:textSize="20sp"
                 android:layout_weight="1"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textColor="@android:color/black" />
 
             <com.tweebaa.ex_seat.model.BatteryView
                 android:id="@+id/battery"
@@ -76,7 +77,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="0.07"
 
-                android:text="@string/button_name1" />
+                android:text="@string/button_name1"
+                android:textColor="@android:color/black" />
 
             <Button
                 android:id="@+id/button2"
@@ -86,7 +88,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="0.07"
                 android:layout_width="100dp"
-                android:text="@string/button_name3" />
+                android:text="@string/button_name3"
+                android:textColor="@android:color/black" />
 
         </LinearLayout>
 

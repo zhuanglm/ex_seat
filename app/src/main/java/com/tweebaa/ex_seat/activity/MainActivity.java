@@ -2,7 +2,6 @@ package com.tweebaa.ex_seat.activity;
 
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -21,6 +20,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -67,7 +67,7 @@ import java.util.Set;
 import java.util.TimeZone;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
 	public MyHandler handler = new MyHandler(this);
 	StringBuffer result = new StringBuffer();
@@ -209,10 +209,14 @@ public class MainActivity extends Activity {
  		//Bundle bundle = intent.getExtras();  //获得全部数据
 		//String value = bundle.getString("name");  //获得名为name的值
 
-		actionBar=getActionBar();
+		//actionBar=getActionBar();
+		final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
 		//actionBar.setDisplayShowTitleEnabled(false);
 		if(actionBar!=null){
 			actionBar.setTitle(R.string.app_page1);
+			actionBar.setDisplayShowHomeEnabled(true);
+			actionBar.setLogo(R.drawable.logo);
+			actionBar.setDisplayUseLogoEnabled(true);
 		}
 
 		database = new DatabaseHelper(this,DataDef.DB_NAME,null,DataDef.version);

@@ -13,20 +13,50 @@
     </style>
 
     <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
+
+    <style name="AppTheme" parent="@style/Theme.AppCompat">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-        <item name="android:actionBarStyle">@style/my_actionbar_style</item>
+        <item name="actionModeBackground">@drawable/cab_background_top_my_actionbar_style</item>
+        <item name="actionBarItemBackground">@drawable/selectable_background_my_actionbar_style</item>
+        <item name="actionBarStyle">@style/ActionBar.Solid.My_actionbar_style</item>
+        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_my_actionbar_style</item>
+        <item name="windowActionBar">true</item>
     </style>
 
-    <style name="my_actionbar_style" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">#0E1A44</item>
-        <item name="android:backgroundSplit">#0E1A44</item>
+
+    <style name="ActionBar.Solid.My_actionbar_style" parent="@style/Widget.AppCompat.ActionBar.Solid">
+
+        <item name="background">@drawable/ab_solid_my_actionbar_style</item>
+        <item name="backgroundStacked">@drawable/ab_stacked_solid_my_actionbar_style</item>
+        <item name="backgroundSplit">@drawable/ab_bottom_solid_my_actionbar_style</item>
+        <item name="progressBarStyle">@style/ProgressBar.My_actionbar_style</item>
+
+
         <item name="android:titleTextStyle">@style/AcBar_titleStyle</item>
+
+    </style>
+
+    <style name="ActionBar.Transparent.My_actionbar_style" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="background">@drawable/ab_transparent_my_actionbar_style</item>
+        <item name="progressBarStyle">@style/ProgressBar.My_actionbar_style</item>
     </style>
 
     <style name="AcBar_titleStyle">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="ProgressBar.My_actionbar_style" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_my_actionbar_style</item>
+    </style>
+
+    <style name="Theme.AppCompat.Translucent">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+
     </style>
 
 </resources>

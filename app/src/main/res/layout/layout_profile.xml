@@ -35,7 +35,8 @@
           android:text="NoName"
           android:id="@+id/text_username"
           android:layout_gravity="bottom|center_horizontal"
-          android:textSize="24dp" />
+          android:textSize="24dp"
+          android:textColor="@android:color/black" />
 
       <TextView
           android:layout_width="wrap_content"
@@ -43,7 +44,8 @@
           android:text="email"
           android:id="@+id/textEmail"
           android:layout_gravity="center_horizontal"
-          android:textSize="18dp"/>
+          android:textSize="18dp"
+          android:textColor="@android:color/black" />
 
       <TextView
           android:layout_width="wrap_content"
@@ -51,7 +53,8 @@
           android:text="city"
           android:id="@+id/textLocation"
           android:layout_gravity="center_horizontal"
-          android:textSize="18dp"/>
+          android:textSize="18dp"
+          android:textColor="@android:color/black" />
 
 
     </LinearLayout>
