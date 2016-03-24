@@ -21,7 +21,7 @@
         <item name="actionBarStyle">@style/ActionBar.Solid.My_actionbar_style</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_my_actionbar_style</item>
         <item name="windowActionBar">true</item>
-
+        <item name="android:textColorPrimary">@android:color/holo_blue_dark</item>
     </style>
 
 
@@ -51,10 +51,13 @@
         <item name="android:progressDrawable">@drawable/progress_horizontal_my_actionbar_style</item>
     </style>
 
-    <style name="Theme.AppCompat.Translucent">
+    <style name="Theme.AppCompat.Translucent" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:textColorHint">@android:color/holo_green_light</item>
+        <item name="android:textColorPrimary">@android:color/holo_blue_dark</item>
+        <item name="android:textColorSecondary">@android:color/darker_gray</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation</item>
 

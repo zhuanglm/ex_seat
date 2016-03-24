@@ -2,12 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C0000000">
-
+   >
 
 
         <FrameLayout
-            android:id="@+id/login_form"
+            android:id="@+id/signup_form"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal|bottom"
@@ -22,10 +21,8 @@
                 android:layout_height="match_parent"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:layout_marginTop="10dp">
-
-
-
+                android:layout_marginTop="10dp"
+                >
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -63,7 +60,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/password"
+                        android:id="@+id/password1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_password"
@@ -80,7 +77,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/repwd"
+                        android:id="@+id/password2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_repeatpwd"
@@ -92,6 +89,17 @@
                         android:singleLine="true" />
 
                 </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/signup_term"
+                    android:id="@+id/textTerm"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="12dp"
+                    android:textIsSelectable="false"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@android:color/black" />
 
                 <Button
                     android:id="@+id/email_sign_in_button"

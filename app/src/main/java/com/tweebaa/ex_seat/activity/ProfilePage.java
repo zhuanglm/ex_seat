@@ -13,7 +13,7 @@ import com.tweebaa.ex_seat.R;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.widget.ProfilePictureView;
-import com.tweebaa.ex_seat.model.DataDef;
+import com.tweebaa.ex_seat.model.DataUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,13 +54,13 @@ public class ProfilePage extends Fragment {
         final TextView text_email = (TextView) view.findViewById(R.id.textEmail);
         final TextView text_city = (TextView) view.findViewById(R.id.textLocation);
 
-        if(DataDef.accessToken != null) {
+        if(DataUtil.accessToken != null) {
             //text_username.setText(DataDef.profile.getName());
             profilePictureView = (ProfilePictureView) view.findViewById(R.id.profilePicture);
             //profilePictureView.setProfileId(DataDef.profile.getId());
 
             GraphRequest request = GraphRequest.newMeRequest(
-                    DataDef.accessToken, new GraphRequest.GraphJSONObjectCallback() {
+                    DataUtil.accessToken, new GraphRequest.GraphJSONObjectCallback() {
                         @Override
                         public void onCompleted(JSONObject me, GraphResponse response) {
                             if (response.getError() != null) {

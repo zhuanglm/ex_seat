@@ -45,17 +45,12 @@ import com.tweebaa.ex_seat.adapter.ViewPagerAdapter;
 import com.tweebaa.ex_seat.model.BatteryView;
 import com.tweebaa.ex_seat.model.DashboardView;
 import com.tweebaa.ex_seat.model.DataCollector;
-import com.tweebaa.ex_seat.model.DataDef;
+import com.tweebaa.ex_seat.model.DataUtil;
 import com.tweebaa.ex_seat.model.DataGraph;
 import com.tweebaa.ex_seat.model.DatabaseHelper;
 import com.tweebaa.ex_seat.model.HighlightCR;
 import com.tweebaa.ex_seat.model.HttpConnect;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -153,8 +148,8 @@ public class MainActivity extends AppCompatActivity {
 					HttpConnect ht = new HttpConnect();
 					//sR = ht.getData(result);
 					Message msg = new Message();
-					msg.what = DataDef.msgTYPE_YES;
-					msg.obj = ht.getData(result);
+					msg.what = DataUtil.msgTYPE_YES;
+					msg.obj = ht.getXMLData(result);
 					handler.sendMessage(msg);
 					//sR = ht.ceshi(result);
 					
@@ -179,11 +174,11 @@ public class MainActivity extends AppCompatActivity {
 					msg.what = 0x1234;
 					Bundle bundle = new Bundle();
 					
-					if(DataDef.dataFromDev.size() >= DataDef.MaxDataSize && DataDef.MaxDataSize>0){ 
-						DataDef.dataFromDev.remove(0); 
+					if(DataUtil.dataFromDev.size() >= DataUtil.MaxDataSize && DataUtil.MaxDataSize>0){
+						DataUtil.dataFromDev.remove(0);
                     }
 					int nData = new Random().nextInt(800) + 1;
-					DataDef.dataFromDev.add(nData);
+					DataUtil.dataFromDev.add(nData);
 					bundle.putInt("get_data", nData);
 					msg.setData(bundle);
 					handler.sendMessage(msg);
@@ -193,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 			};
 			tBT.start();
 	    	//Toast.makeText(getApplicationContext(),sR,Toast.LENGTH_SHORT).show();
-	        handler.postDelayed(this, DataDef.TimeInterver_BT);
+	        handler.postDelayed(this, DataUtil.TimeInterver_BT);
 						
 			}
 	};
@@ -219,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
 			actionBar.setDisplayUseLogoEnabled(true);
 		}
 
-		database = new DatabaseHelper(this,DataDef.DB_NAME,null,DataDef.version);
+		database = new DatabaseHelper(this, DataUtil.DB_NAME,null, DataUtil.version);
 		db = database.getReadableDatabase();
 
 		List<View> viewList = new ArrayList<>();
@@ -411,7 +406,7 @@ public class MainActivity extends AppCompatActivity {
 	                if(m_bStopFlag)
 	                {
 	                	BKSwitchbtn.setText(R.string.button_name1);
-	                	handler.postDelayed(runnable_short, DataDef.TimeInterver_BT);
+	                	handler.postDelayed(runnable_short, DataUtil.TimeInterver_BT);
 	            		handler.postDelayed(runnable_long, 1000);
 	            		m_bStopFlag = false;
 	                }
@@ -424,15 +419,15 @@ public class MainActivity extends AppCompatActivity {
 
 						sDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss", Locale.getDefault());
 						String date = sDateFormat.format(new java.util.Date());
-						//Toast.makeText(getApplicationContext(),Integer.toString(DataCollector.m_nTimes*DataDef.TimeInterver_BT/1000),Toast.LENGTH_SHORT).show();
+						//Toast.makeText(getApplicationContext(),Integer.toString(DataCollector.m_nTimes*DataUtil.TimeInterver_BT/1000),Toast.LENGTH_SHORT).show();
 						//Toast.makeText(getApplicationContext(),date,Toast.LENGTH_SHORT).show();
 						ContentValues cv = new ContentValues();
 						cv.put("date", date);
-						long  ms = DataCollector.m_nTimes*DataDef.TimeInterver_BT ;//毫秒数
+						long  ms = DataCollector.m_nTimes* DataUtil.TimeInterver_BT ;//毫秒数
 						SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss",Locale.getDefault());//初始化Formatter的转换格式。
 						formatter.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
 						String hms = formatter.format(ms);
-						//cv.put("duration",Integer.toString(DataCollector.m_nTimes*DataDef.TimeInterver_BT / 1000));
+						//cv.put("duration",Integer.toString(DataCollector.m_nTimes*DataUtil.TimeInterver_BT / 1000));
 						cv.put("duration",hms);
 						cv.put("max", Integer.toString(DataCollector.getMaxRPM()));
 						cv.put("avg", Integer.toString(DataCollector.m_nAverageRPM));
@@ -455,7 +450,7 @@ public class MainActivity extends AppCompatActivity {
 	            }
 	        });
 		
-		handler.postDelayed(runnable_short, DataDef.TimeInterver_BT);
+		handler.postDelayed(runnable_short, DataUtil.TimeInterver_BT);
 		handler.postDelayed(runnable_long, 1000);
 	}
 
@@ -533,47 +528,7 @@ public class MainActivity extends AppCompatActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	public static String Inputstr2Str_Reader(InputStream in, String encode)
-    {
-        
-        String str = "";
-        try
-        {
-            if (encode == null || encode.equals(""))
-            {
-                // 默认以utf-8形式
-                encode = "utf-8";
-            }
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in, encode));
-            StringBuffer sb = new StringBuffer();
-            
-            while ((str = reader.readLine()) != null)
-            {
-                sb.append(str).append("\n");
-            }
-            return sb.toString();
-        }
-        catch (UnsupportedEncodingException e1)
-        {
-            e1.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        
-        return str;
-    }
-	
-	public static boolean isNumeric(String str){
-		for (int i = 0; i < str.length(); i++){
-		   System.out.println(str.charAt(i));
-		   if (!Character.isDigit(str.charAt(i))){
-		    return false;
-		   }
-		}
-		return true;
-	}
+
 
 	private void initeCursor() {
 		Bitmap view_cursor = BitmapFactory.decodeResource(getResources(), R.drawable.cursor);
@@ -583,11 +538,11 @@ public class MainActivity extends AppCompatActivity {
 		dm = getResources().getDisplayMetrics();
 
 		//offSet = (dm.widthPixels - 3 * bmWidth) / 6;
-		float scalx = (dm.widthPixels/DataDef.WinTabNum);
+		float scalx = (dm.widthPixels/ DataUtil.WinTabNum);
 		scalx /= bmWidth;
 		matrix.setScale(scalx,1f);
 		bmWidth*=scalx;
-		offSet = (dm.widthPixels/DataDef.WinTabNum - bmWidth) / 2;
+		offSet = (dm.widthPixels/ DataUtil.WinTabNum - bmWidth) / 2;
 		//matrix.setTranslate(offSet, 0);
 		matrix.postTranslate(offSet, 0);
 		imageView.setImageMatrix(matrix); // 需要imageView的scaleType为matrix

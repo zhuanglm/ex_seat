@@ -10,7 +10,7 @@ public interface XML_Parser {
      * @return 
      * @throws Exception 
      */  
-    public List<XML_Node> parse(InputStream is) throws Exception;  
+    public List<XML_Node> parse(InputStream is,String title,String key) throws Exception;
       
     /** 
      * 序列化XML_Node对象集合 得到XML形式的字符串 

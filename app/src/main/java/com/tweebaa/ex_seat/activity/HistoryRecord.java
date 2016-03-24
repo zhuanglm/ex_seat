@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import com.tweebaa.ex_seat.R;
-import com.tweebaa.ex_seat.model.DataDef;
+import com.tweebaa.ex_seat.model.DataUtil;
 import com.tweebaa.ex_seat.model.DatabaseHelper;
 
 import java.text.SimpleDateFormat;
@@ -36,7 +36,7 @@ public class HistoryRecord extends Fragment {
         super.onAttach(context);
         mAct = getActivity();
         //mActivity.setHandler(mHandler);
-        database = new DatabaseHelper(context, DataDef.DB_NAME,null,DataDef.version);
+        database = new DatabaseHelper(context, DataUtil.DB_NAME,null, DataUtil.version);
         db = database.getReadableDatabase();
     }
 

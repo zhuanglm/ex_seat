@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.tweebaa.ex_seat.R;
 import com.tweebaa.ex_seat.model.DashboardView;
 import com.tweebaa.ex_seat.model.DataCollector;
-import com.tweebaa.ex_seat.model.DataDef;
+import com.tweebaa.ex_seat.model.DataUtil;
 import com.tweebaa.ex_seat.model.DataGraph;
 import com.tweebaa.ex_seat.model.DatabaseHelper;
 import com.tweebaa.ex_seat.model.HighlightCR;
@@ -55,7 +55,7 @@ public class GuagePage extends Fragment {
         m_Act = getActivity();
         m_Context = context;
 
-        database = new DatabaseHelper(context,DataDef.DB_NAME,null,DataDef.version);
+        database = new DatabaseHelper(context,DataUtil.DB_NAME,null,DataUtil.version);
         db = database.getReadableDatabase();
     }
 
@@ -75,7 +75,7 @@ public class GuagePage extends Fragment {
                 if(m_bStopFlag)
                 {
                     BKSwitchbtn.setText(R.string.button_name1);
-                    ((MainActivity)m_Act).handler.postDelayed(((MainActivity)m_Act).runnable_short, DataDef.TimeInterver_BT);
+                    ((MainActivity)m_Act).handler.postDelayed(((MainActivity)m_Act).runnable_short, DataUtil.TimeInterver_BT);
                     ((MainActivity)m_Act).handler.postDelayed(((MainActivity)m_Act).runnable_long, 1000);
                     m_bStopFlag = false;
                 }
@@ -92,7 +92,7 @@ public class GuagePage extends Fragment {
                     //Toast.makeText(getApplicationContext(),date,Toast.LENGTH_SHORT).show();
                     ContentValues cv = new ContentValues();
                     cv.put("date", date);
-                    long  ms = DataCollector.m_nTimes*DataDef.TimeInterver_BT ;//毫秒数
+                    long  ms = DataCollector.m_nTimes*DataUtil.TimeInterver_BT ;//毫秒数
                     SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");//初始化Formatter的转换格式。
                     formatter.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
                     String hms = formatter.format(ms);

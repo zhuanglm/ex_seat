@@ -60,10 +60,10 @@
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="cadetblue">#5F9EA0</color>
-    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.2.0/res/values/values.xml -->
     <eat-comment/>
-    <color name="cardview_dark_background">#FF202020</color>
-    <color name="cardview_light_background">#FFFAFAFA</color>
+    <color name="cardview_dark_background">#FF424242</color>
+    <color name="cardview_light_background">#FFFFFFFF</color>
     <color name="cardview_shadow_end_color">#03000000</color>
     <color name="cardview_shadow_start_color">#37000000</color>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/src/main/res/values/color.xml -->
@@ -73,7 +73,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.10.0/res/values/values.xml -->
+    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.10.1/res/values/values.xml -->
     <eat-comment/>
     <color name="com_facebook_blue">#3B5998</color>
     <color name="com_facebook_button_background_color">#415dae</color>
@@ -321,7 +321,7 @@
     <declare-styleable name="AppCompatTextView"><attr format="reference|boolean" name="textAllCaps"/><attr name="android:textAppearance"/></declare-styleable>
     <declare-styleable name="BatteryView"><attr format="integer" name="minBattery"/><attr format="integer" name="maxBattery"/><attr format="float" name="currentValue"/><attr format="dimension" name="batteryWidth"/><attr format="dimension" name="batteryLength"/><attr format="color" name="emptyColor"/><attr format="color" name="stripeColor"/><attr name="batteryMode"><enum name="vertical" value="1"/><enum name="horizontal" value="2"/></attr></declare-styleable>
     <declare-styleable name="ButtonBarLayout"><attr format="boolean" name="allowStacking"/></declare-styleable>
-    <declare-styleable name="CardView"><attr format="color" name="cardBackgroundColor"/><attr format="dimension" name="cardCornerRadius"/><attr format="dimension" name="cardElevation"/><attr format="dimension" name="cardMaxElevation"/><attr format="boolean" name="cardUseCompatPadding"/><attr format="boolean" name="cardPreventCornerOverlap"/><attr format="dimension" name="contentPadding"/><attr format="dimension" name="contentPaddingLeft"/><attr format="dimension" name="contentPaddingRight"/><attr format="dimension" name="contentPaddingTop"/><attr format="dimension" name="contentPaddingBottom"/></declare-styleable>
+    <declare-styleable name="CardView"><attr format="color" name="cardBackgroundColor"/><attr format="dimension" name="cardCornerRadius"/><attr format="dimension" name="cardElevation"/><attr format="dimension" name="cardMaxElevation"/><attr format="boolean" name="cardUseCompatPadding"/><attr format="boolean" name="cardPreventCornerOverlap"/><attr format="dimension" name="contentPadding"/><attr format="dimension" name="contentPaddingLeft"/><attr format="dimension" name="contentPaddingRight"/><attr format="dimension" name="contentPaddingTop"/><attr format="dimension" name="contentPaddingBottom"/><attr name="android:minWidth"/><attr name="android:minHeight"/></declare-styleable>
     <declare-styleable name="CollapsingAppBarLayout_LayoutParams"><attr name="layout_collapseMode"><enum name="none" value="0"/><enum name="pin" value="1"/><enum name="parallax" value="2"/></attr><attr format="float" name="layout_collapseParallaxMultiplier"/></declare-styleable>
     <declare-styleable name="CollapsingToolbarLayout"><attr format="dimension" name="expandedTitleMargin"/><attr format="dimension" name="expandedTitleMarginStart"/><attr format="dimension" name="expandedTitleMarginTop"/><attr format="dimension" name="expandedTitleMarginEnd"/><attr format="dimension" name="expandedTitleMarginBottom"/><attr format="reference" name="expandedTitleTextAppearance"/><attr format="reference" name="collapsedTitleTextAppearance"/><attr format="color" name="contentScrim"/><attr format="color" name="statusBarScrim"/><attr format="reference" name="toolbarId"/><attr name="collapsedTitleGravity"><flag name="top" value="0x30"/><flag name="bottom" value="0x50"/><flag name="left" value="0x03"/><flag name="right" value="0x05"/><flag name="center_vertical" value="0x10"/><flag name="fill_vertical" value="0x70"/><flag name="center_horizontal" value="0x01"/><flag name="center" value="0x11"/><flag name="start" value="0x00800003"/><flag name="end" value="0x00800005"/></attr><attr name="expandedTitleGravity"><flag name="top" value="0x30"/><flag name="bottom" value="0x50"/><flag name="left" value="0x03"/><flag name="right" value="0x05"/><flag name="center_vertical" value="0x10"/><flag name="fill_vertical" value="0x70"/><flag name="center_horizontal" value="0x01"/><flag name="center" value="0x11"/><flag name="start" value="0x00800003"/><flag name="end" value="0x00800005"/></attr><attr format="boolean" name="titleEnabled"/><attr name="title"/></declare-styleable>
     <declare-styleable name="CompoundButton"><attr name="android:button"/><attr format="color" name="buttonTint"/><attr name="buttonTintMode"><enum name="src_over" value="3"/><enum name="src_in" value="5"/><enum name="src_atop" value="9"/><enum name="multiply" value="14"/><enum name="screen" value="15"/></attr></declare-styleable>
@@ -431,12 +431,12 @@
     <eat-comment/>
     <dimen name="activity_horizontal_margin">0dp</dimen>
     <dimen name="activity_vertical_margin">0dp</dimen>
-    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.2.0/res/values/values.xml -->
     <eat-comment/>
     <dimen name="cardview_compat_inset_shadow">1dp</dimen>
     <dimen name="cardview_default_elevation">2dp</dimen>
     <dimen name="cardview_default_radius">2dp</dimen>
-    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.10.0/res/values/values.xml -->
+    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.10.1/res/values/values.xml -->
     <eat-comment/>
     <dimen name="com_facebook_auth_dialog_corner_radius">2dp</dimen>
     <dimen name="com_facebook_auth_dialog_corner_radius_oversized">4dp</dimen>
@@ -563,6 +563,8 @@
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="Design_Total">/CollageAPI.ashx?action=load_publish_total</string>
+    <string name="Param_Login">username =%1$s&amp;Password =%2$s</string>
+    <string name="Req_PostAPI">/UCAPI.ashx</string>
     <string name="Req_URL">http://67.224.94.82/mobileApp</string>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
     <eat-comment/>
@@ -617,7 +619,7 @@
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/res/values/values.xml -->
     <eat-comment/>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
-    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.10.0/res/values/values.xml -->
+    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.10.1/res/values/values.xml -->
     <eat-comment/>
     <string name="com_facebook_device_auth_instructions">Visit &lt;b>facebook.com/device&lt;/b>&lt;br />on your smartphone or computer&lt;br />and enter this code</string>
     <string name="com_facebook_image_download_unknown_error">Unexpected error while downloading an image.</string>
@@ -650,7 +652,7 @@
     <string name="item_avgtitle">Average:</string>
     <string name="item_subtitle">Total Max RPM:</string>
     <string name="login">LOG IN</string>
-    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.10.0/res/values/values.xml -->
+    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.10.1/res/values/values.xml -->
     <eat-comment/>
     <string name="messenger_send_button_text">Send</string>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/src/main/res/values/strings.xml -->
@@ -663,6 +665,7 @@
     <string name="prompt_repeatpwd">Repeat Password</string>
     <string name="prompt_user">User Name</string>
     <string name="r_min">×100 r/Min</string>
+    <string name="signup_term"><a href="http://www.baidu.com">Terms of Use</a> and <a href="http://www.google.ca">Privacy Policy</a></string>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
     <eat-comment/>
     <string name="status_bar_notification_info_overflow">999+</string>
@@ -712,7 +715,7 @@
         <item name="actionBarStyle">@style/ActionBar.Solid.My_actionbar_style</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_my_actionbar_style</item>
         <item name="windowActionBar">true</item>
-
+        <item name="android:textColorPrimary">@android:color/holo_blue_dark</item>
     </style>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
     <eat-comment/>
@@ -1663,7 +1666,7 @@
         <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
         <item name="tabSelectedTextColor">?android:textColorPrimary</item>
     </style>
-    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.1.1/res/values/values.xml -->
+    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.2.0/res/values/values.xml -->
     <eat-comment/>
     <style name="CardView">
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
@@ -1679,7 +1682,7 @@
     <style name="CardView.Light">
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
     </style>
-    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.10.0/res/values/values.xml -->
+    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.10.1/res/values/values.xml -->
     <eat-comment/>
     <style name="MessengerButton">
     <item name="android:clickable">true</item>
@@ -2009,10 +2012,13 @@
     </style>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/src/main/res/values/styles.xml -->
     <eat-comment/>
-    <style name="Theme.AppCompat.Translucent">
+    <style name="Theme.AppCompat.Translucent" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:textColorHint">@android:color/holo_green_light</item>
+        <item name="android:textColorPrimary">@android:color/holo_blue_dark</item>
+        <item name="android:textColorSecondary">@android:color/darker_gray</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation</item>
 
@@ -2168,7 +2174,7 @@
         <item name="counterTextAppearance">@style/TextAppearance.Design.Counter</item>
         <item name="counterOverflowTextAppearance">@style/TextAppearance.Design.Counter.Overflow</item>
     </style>
-    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.10.0/res/values/values.xml -->
+    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.10.1/res/values/values.xml -->
     <eat-comment/>
     <style name="com_facebook_auth_dialog" parent="android:style/Theme.Dialog">
         <item name="android:windowIsTranslucent">true</item>

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="facebook_app_id">193614721005020</string>
     <string name="app_name">ex_seat</string>
@@ -29,9 +28,13 @@
     <string name="r_min">×100 r/Min</string>
     <string name="Req_URL">http://67.224.94.82/mobileApp</string>
     <string name="Design_Total">/CollageAPI.ashx?action=load_publish_total</string>
+    <string name="Req_PostAPI">/UCAPI.ashx</string>
+    <string name="Param_Login">username =%1$s&amp;Password =%2$s</string>
     <string name="calory">Calories Today</string>
     <string name="login">LOG IN</string>
     <string name="title_activity_login">Sign in</string>
+
+    <string name="signup_term"><a href="http://www.baidu.com">Terms of Use</a> and <a href="http://www.google.ca">Privacy Policy</a></string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

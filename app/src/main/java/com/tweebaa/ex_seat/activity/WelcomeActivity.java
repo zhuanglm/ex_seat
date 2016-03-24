@@ -19,7 +19,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.tweebaa.ex_seat.R;
-import com.tweebaa.ex_seat.model.DataDef;
+import com.tweebaa.ex_seat.model.DataUtil;
 
 import org.json.JSONObject;
 
@@ -51,11 +51,11 @@ public class WelcomeActivity extends AppCompatActivity  {
 	        }
 	    };*/
 	    // If the access token is available already assign it.
-	    DataDef.accessToken = AccessToken.getCurrentAccessToken();
-		if(DataDef.accessToken != null){
-			//String sLogonName = DataDef.accessToken.getUserId();
+	    DataUtil.accessToken = AccessToken.getCurrentAccessToken();
+		if(DataUtil.accessToken != null){
+			//String sLogonName = DataUtil.accessToken.getUserId();
 			//Toast.makeText(getApplicationContext(),sLogonName,Toast.LENGTH_LONG).show();
-			DataDef.profile = Profile.getCurrentProfile();
+			DataUtil.profile = Profile.getCurrentProfile();
 		}
 
 
@@ -65,9 +65,9 @@ public class WelcomeActivity extends AppCompatActivity  {
 			public void onSuccess(LoginResult loginResult) {
 				//super.onSucess(loginResult);
 
-				DataDef.accessToken = loginResult.getAccessToken();
-				DataDef.profile = Profile.getCurrentProfile();
-				//String sLogonName = DataDef.accessToken.getUserId();
+				DataUtil.accessToken = loginResult.getAccessToken();
+				DataUtil.profile = Profile.getCurrentProfile();
+				//String sLogonName = DataUtil.accessToken.getUserId();
 				//Toast.makeText(getApplicationContext(),sLogonName,Toast.LENGTH_LONG).show();*/
 
 				GraphRequest request = GraphRequest.newMeRequest(

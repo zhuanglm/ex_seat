@@ -65,7 +65,7 @@ public class DataGraph extends View{
         YPoint = YLength+40;
         YScale = YLength/YScaleRange;
         XLength = this.getWidth();
-        DataDef.MaxDataSize = XLength / XScale;
+        DataUtil.MaxDataSize = XLength / XScale;
         
         
         paint.setStyle(Paint.Style.STROKE); 
@@ -102,10 +102,10 @@ public class DataGraph extends View{
         //画X轴 
         canvas.drawLine(XPoint, YPoint, XPoint + XLength, YPoint, paint); 
         //System.out.println("Data.size = " + DataDef.dataFromDev.size());
-        if(DataDef.dataFromDev.size() > 1){ 
-            for(int i=1; i<DataDef.dataFromDev.size(); i++){ 
-                canvas.drawLine(XPoint + (i-1) * XScale, YPoint - (float)((DataDef.dataFromDev.get(i-1)*0.01-0.01) * YLength/YScaleRange),  
-                        XPoint + i * XScale, (float)(YPoint - (DataDef.dataFromDev.get(i)*0.01-0.01)* YLength/YScaleRange), chart_paint); 
+        if(DataUtil.dataFromDev.size() > 1){
+            for(int i=1; i<DataUtil.dataFromDev.size(); i++){
+                canvas.drawLine(XPoint + (i-1) * XScale, YPoint - (float)((DataUtil.dataFromDev.get(i-1)*0.01-0.01) * YLength/YScaleRange),
+                        XPoint + i * XScale, (float)(YPoint - (DataUtil.dataFromDev.get(i)*0.01-0.01)* YLength/YScaleRange), chart_paint);
             } 
         } 
     } 

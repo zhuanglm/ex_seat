@@ -18,7 +18,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -27,6 +26,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.tweebaa.ex_seat.R;
+import com.tweebaa.ex_seat.model.HttpConnect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,15 +36,8 @@ import java.util.List;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>,
-        SignupFragment.OnFragmentInteractionListener {
+        SignupFragment.OnFragmentInteractionListener,View.OnClickListener {
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -70,7 +63,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mActionBar.setDisplayShowHomeEnabled(true);
             mActionBar.setLogo(R.drawable.logo);
             mActionBar.setDisplayUseLogoEnabled(true);
-            mActionBar.setTitle(R.string.login);
+            //mActionBar.setTitle(R.string.login);
         }
 
         // Set up the login form.
@@ -90,29 +83,37 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
-
+        mEmailSignInButton.setOnClickListener(this);
         Button mSignupButton = (Button) findViewById(R.id.sign_up_button);
-        mSignupButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        mSignupButton.setOnClickListener(this);
+        Button mForgotButton = (Button) findViewById(R.id.buttonForgot);
+        mForgotButton.setOnClickListener(this);
+
+        mLoginFormView = findViewById(R.id.login_form);
+        mProgressView = findViewById(R.id.login_progress);
+    }
+
+    @Override
+    public void onClick(View view) {
+        int _id = view.getId();
+        switch (_id) {
+            case R.id.email_sign_in_button:
+                attemptLogin();
+                break;
+            case R.id.sign_up_button:
                 mFragmentManager = getFragmentManager();
                 android.app.FragmentTransaction trans = mFragmentManager.beginTransaction();
                 trans.setCustomAnimations(R.anim.glide_fragment_horizontal_in,R.anim.glide_fragment_horizontal_out);
                 trans.add(R.id.popup_container, SignupFragment.newInstance("", ""), "SignupFragment");
                 trans.addToBackStack("SignupFragment");
-
                 trans.commit();
-            }
-        });
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+                break;
+            case R.id.buttonForgot:
+                Uri uri = Uri.parse("http://www.google.com");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+                break;
+        }
     }
 
     @Override
@@ -318,19 +319,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
+
             try {
                 // Simulate network access.
                 Thread.sleep(200);
+                String _reqURL = getResources().getString(R.string.Req_URL)+getResources().getString(R.string.Req_PostAPI);
+                String _postParams = String.format(getResources().getString(R.string.Param_Login)
+                        ,mEmail.toString(),mPassword.toString());
+
+                HttpConnect ht = new HttpConnect();
+                String rR = ht.postXMLData(_reqURL, _postParams);
+                int nR;
+                try{
+                    nR = Integer.parseInt(rR);
+                    if(nR<0)
+                        return false;
+                }catch (NumberFormatException ne){
+                    return false;
+                }
+
             } catch (InterruptedException e) {
                 return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
             }
 
             // TODO: register the new account here.
