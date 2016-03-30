@@ -7,14 +7,20 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.tweebaa.ex_seat.R;
@@ -41,7 +47,11 @@ public class SignupFragment extends Fragment implements LoaderManager.LoaderCall
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    private AutoCompleteTextView mEmailView;
+    private OnProgressListener  mProgressListener;
+    private AutoCompleteTextView mEmailView,mUsername;
+    private EditText mPassword1View,mPassword2View;
+
+    private UserSignupTask mAuthTask = null;
 
     public SignupFragment() {
         // Required empty public constructor
@@ -80,7 +90,204 @@ public class SignupFragment extends Fragment implements LoaderManager.LoaderCall
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.layout_signup, container, false);
+        View view = inflater.inflate(R.layout.layout_signup, container, false);
+
+        // Set up the signup form.
+        mEmailView = (AutoCompleteTextView) view.findViewById(R.id.email);
+        mUsername = (AutoCompleteTextView) view.findViewById(R.id.username);
+        populateAutoComplete();
+        mPassword1View = (EditText) view.findViewById(R.id.password1);
+        mPassword2View = (EditText) view.findViewById(R.id.password2);
+        mEmailView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (id == EditorInfo.IME_ACTION_NEXT) {
+                    mUsername.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        mUsername.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (id == EditorInfo.IME_ACTION_NEXT) {
+                    mPassword1View.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        mPassword1View.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (id == R.id.next || id == EditorInfo.IME_NULL) {
+                    mPassword2View.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+        mPassword2View.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (id == R.id.signup || id == EditorInfo.IME_NULL) {
+                    attemptSignup();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        Button mSignupButton = (Button) view.findViewById(R.id.sign_up_button);
+        mSignupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                attemptSignup();
+            }
+        });
+        return view;
+    }
+
+    private void attemptSignup() {
+        if (mAuthTask != null) {
+            return;
+        }
+
+        // Reset errors.
+        mEmailView.setError(null);
+        mPassword1View.setError(null);
+        mPassword2View.setError(null);
+
+        // Store values at the time of the login attempt.
+        String email = mEmailView.getText().toString();
+        String username = mUsername.getText().toString();
+        String password = mPassword1View.getText().toString();
+        String re_password = mPassword2View.getText().toString();
+
+        boolean cancel = false;
+        View focusView = null;
+
+        // Check for a valid password, if the user entered one.
+        if (!TextUtils.isEmpty(re_password) && !isPasswordMatched(password, re_password)) {
+            mPassword2View.setError(getString(R.string.error_incorrect_password));
+            focusView = mPassword2View;
+            cancel = true;
+        }
+        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+            mPassword1View.setError(getString(R.string.error_invalid_password));
+            focusView = mPassword1View;
+            cancel = true;
+        }
+
+
+        // Check for a valid email address.
+        if (!isEmailValid(email)) {
+            mEmailView.setError(getString(R.string.error_invalid_email));
+            focusView = mEmailView;
+            cancel = true;
+        }else if (TextUtils.isEmpty(email)) {
+            mEmailView.setError(getString(R.string.error_field_required));
+            focusView = mEmailView;
+            cancel = true;
+        }
+
+        if (cancel) {
+            // There was an error; don't attempt login and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        } else {
+            // Show a progress spinner, and kick off a background task to
+            // perform the user login attempt.
+            if (mProgressListener != null) {
+                mProgressListener.onShowProgress(true);
+            }
+            mAuthTask = new UserSignupTask(email,username, password);
+            mAuthTask.execute((Void) null);
+        }
+    }
+
+    private boolean isEmailValid(String email) {
+        //TODO: Replace this with your own logic
+        return email.contains("@");
+    }
+
+    private boolean isPasswordValid(String password) {
+        //TODO: Replace this with your own logic
+        return password.length() > 4;
+    }
+
+    private boolean isPasswordMatched(String pwd1,String pwd2) {
+        //TODO: Replace this with your own logic
+        return pwd1.equals(pwd2);
+    }
+
+    public class UserSignupTask extends AsyncTask<Void, Void, Boolean> {
+
+        private final String mEmail,mUsername;
+        private final String mPassword;
+
+        UserSignupTask(String email,String username, String password) {
+            mEmail = email;
+            mPassword = password;
+            mUsername = username;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+
+
+            try {
+                // Simulate network access.
+                Thread.sleep(2000);
+                /*String _reqURL = getResources().getString(R.string.Req_URL)+getResources().getString(R.string.Req_PostAPI);
+                String _postParams = String.format(getResources().getString(R.string.Param_Login)
+                        ,mEmail.toString(),mPassword.toString());
+
+                HttpConnect ht = new HttpConnect();
+                String rR = ht.postXMLData(_reqURL, _postParams);
+                int nR;
+                try{
+                    nR = Integer.parseInt(rR);
+                    if(nR<0)
+                        return false;
+                }catch (NumberFormatException ne){
+                    return false;
+                }*/
+
+            } catch (InterruptedException e) {
+                return false;
+            }
+
+            // TODO: register the new account here.
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            mAuthTask = null;
+            if (mProgressListener != null) {
+                mProgressListener.onShowProgress(false);
+            }
+
+            /*if (success) {
+                finish();
+            } else {
+                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                mPasswordView.requestFocus();
+            }*/
+        }
+
+        @Override
+        protected void onCancelled() {
+            mAuthTask = null;
+            if (mProgressListener != null) {
+                mProgressListener.onShowProgress(false);
+            }
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -101,8 +308,8 @@ public class SignupFragment extends Fragment implements LoaderManager.LoaderCall
         //tPwd.getBackground().setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.SRC_IN);
 
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView)getActivity().findViewById(R.id.email);
-        populateAutoComplete();
+        //mEmailView = (AutoCompleteTextView)getActivity().findViewById(R.id.email);
+        //populateAutoComplete();
     }
 
     private void populateAutoComplete() {
@@ -114,6 +321,7 @@ public class SignupFragment extends Fragment implements LoaderManager.LoaderCall
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
+            mProgressListener = (OnProgressListener)context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -124,6 +332,7 @@ public class SignupFragment extends Fragment implements LoaderManager.LoaderCall
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        mProgressListener = null;
     }
 
 
@@ -193,5 +402,10 @@ public class SignupFragment extends Fragment implements LoaderManager.LoaderCall
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    //show progress in activity interface
+    public interface OnProgressListener {
+        void onShowProgress(boolean show);
     }
 }

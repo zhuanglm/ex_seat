@@ -10,8 +10,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal|bottom"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:background="@drawable/boarder_style">
 
             <LinearLayout
@@ -64,9 +64,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_password"
-                        android:imeActionId="@+id/login"
-                        android:imeActionLabel="@string/action_sign_in_short"
-                        android:imeOptions="actionNext"
+                        android:imeActionId="@+id/next"
+                        android:imeActionLabel="@string/action_repeat_password"
+                        android:imeOptions="actionUnspecified"
                         android:inputType="textPassword"
                         android:maxLines="1"
                         android:singleLine="true" />
@@ -81,9 +81,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_repeatpwd"
-                        android:imeActionId="@+id/login"
-                        android:imeActionLabel="@string/action_sign_in_short"
-                        android:imeOptions="actionNext"
+                        android:imeActionId="@+id/signup"
+                        android:imeActionLabel="@string/button_signup"
+                        android:imeOptions="actionUnspecified"
                         android:inputType="textPassword"
                         android:maxLines="1"
                         android:singleLine="true" />
@@ -102,7 +102,7 @@
                     android:textColor="@android:color/black" />
 
                 <Button
-                    android:id="@+id/email_sign_in_button"
+                    android:id="@+id/sign_up_button"
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"

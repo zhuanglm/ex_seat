@@ -591,6 +591,7 @@
     <eat-comment/>
     <string name="action_clear">Clear Data</string>
     <string name="action_exit">Exit</string>
+    <string name="action_repeat_password">Again</string>
     <string name="action_return">return</string>
     <string name="action_settings">Settings</string>
     <string name="action_sign_in">Sign in or register</string>

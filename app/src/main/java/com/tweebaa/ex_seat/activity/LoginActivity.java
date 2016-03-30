@@ -36,7 +36,7 @@ import java.util.List;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>,
-        SignupFragment.OnFragmentInteractionListener,View.OnClickListener {
+        SignupFragment.OnFragmentInteractionListener,SignupFragment.OnProgressListener,View.OnClickListener {
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -71,6 +71,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
+        mEmailView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (id == EditorInfo.IME_ACTION_NEXT) {
+                    mPasswordView.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -104,7 +114,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 mFragmentManager = getFragmentManager();
                 android.app.FragmentTransaction trans = mFragmentManager.beginTransaction();
                 trans.setCustomAnimations(R.anim.glide_fragment_horizontal_in,R.anim.glide_fragment_horizontal_out);
-                trans.add(R.id.popup_container, SignupFragment.newInstance("", ""), "SignupFragment");
+                trans.add(R.id.login_form, SignupFragment.newInstance("", ""), "SignupFragment");
                 trans.addToBackStack("SignupFragment");
                 trans.commit();
                 break;
@@ -245,6 +255,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		} else if (DTOA.equals(intent)) {
 			addFragmentContent(FragmentA.newInstance("", ""));
 		}*/
+    }
+
+    @Override
+    public void onShowProgress(boolean show) {
+        showProgress(show);
     }
 
     @Override
