@@ -505,6 +505,9 @@
     <dimen name="notification_large_icon_height">64dp</dimen>
     <dimen name="notification_large_icon_width">64dp</dimen>
     <dimen name="notification_subtext_size">12dp</dimen>
+    <!-- From: file:/D:/ADT%20workspace/ex_seat/app/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="spacing_medium">1dp</dimen>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <drawable name="blue">#0000FF</drawable>
@@ -564,6 +567,7 @@
     <eat-comment/>
     <string name="Design_Total">/CollageAPI.ashx?action=load_publish_total</string>
     <string name="Param_Login">username =%1$s&amp;Password =%2$s</string>
+    <string name="Param_Signup">username =%1$s&amp;user =%2$s&amp;Password =%3$s</string>
     <string name="Req_PostAPI">/UCAPI.ashx</string>
     <string name="Req_URL">http://67.224.94.82/mobileApp</string>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
@@ -597,15 +601,16 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="app_name">ex_seat</string>
-    <string name="app_page1">Workout</string>
-    <string name="app_page2">History</string>
-    <string name="app_page3">Profile</string>
-    <string name="app_page4">LeaderBoard</string>
+    <string name="app_page1"> Workout</string>
+    <string name="app_page2"> History</string>
+    <string name="app_page3"> Profile</string>
+    <string name="app_page4"> LeaderBoard</string>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/res/values/values.xml -->
     <eat-comment/>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="birthday">Birthday</string>
     <string name="button_forgot">Forgot Password?</string>
     <string name="button_join">Join Now</string>
     <string name="button_login">Tweebaa User</string>
@@ -647,12 +652,15 @@
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="facebook_app_id">193614721005020</string>
+    <string name="gender">Gender</string>
+    <string name="height">Height</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_world">Hello world!</string>
     <string name="interact_message">You just clicked on the Button!</string>
     <string name="item_avgtitle">Average:</string>
     <string name="item_subtitle">Total Max RPM:</string>
     <string name="login">LOG IN</string>
+    <string name="logout">LOG OUT</string>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.10.1/res/values/values.xml -->
     <eat-comment/>
     <string name="messenger_send_button_text">Send</string>
@@ -673,11 +681,13 @@
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="title_activity_login">Sign in</string>
+    <string name="units">Units of Measure</string>
+    <string name="weight">Weight</string>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AcBar_titleStyle">
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/royalblue</item>
+        <item name="android:textColor">@color/white</item>
     </style>
     <style name="ActionBar.Solid.My_actionbar_style" parent="@style/Widget.AppCompat.ActionBar.Solid">
 
@@ -685,9 +695,7 @@
         <item name="backgroundStacked">@drawable/ab_stacked_solid_my_actionbar_style</item>
         <item name="backgroundSplit">@drawable/ab_bottom_solid_my_actionbar_style</item>
         <item name="progressBarStyle">@style/ProgressBar.My_actionbar_style</item>
-
-
-        <item name="android:titleTextStyle">@style/AcBar_titleStyle</item>
+        <item name="titleTextStyle">@style/AcBar_titleStyle</item>
 
     </style>
     <style name="ActionBar.Transparent.My_actionbar_style" parent="@style/Widget.AppCompat.ActionBar">
@@ -709,14 +717,14 @@
             backward-compatibility can go here.
         -->
     </style>
-    <style name="AppTheme" parent="@style/Theme.AppCompat">
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <item name="actionModeBackground">@drawable/cab_background_top_my_actionbar_style</item>
         <item name="actionBarItemBackground">@drawable/selectable_background_my_actionbar_style</item>
         <item name="actionBarStyle">@style/ActionBar.Solid.My_actionbar_style</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_my_actionbar_style</item>
         <item name="windowActionBar">true</item>
-        <item name="android:textColorPrimary">@android:color/holo_blue_dark</item>
+
     </style>
     <!-- From: file:/D:/ADT%20workspace/ex_seat/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
     <eat-comment/>

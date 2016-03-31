@@ -367,6 +367,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
+                Intent intent = new Intent();
+                intent.setClass(LoginActivity.this, MainActivity.class);  //从IntentActivity跳转到SubActivity
+                intent.putExtra("name", "raymond");  //放入数据
+                startActivity(intent);  //开始跳转
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

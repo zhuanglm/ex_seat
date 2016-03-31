@@ -2,12 +2,12 @@
     <string name="facebook_app_id">193614721005020</string>
     <string name="app_name">ex_seat</string>
 
-    <string name="app_page1">Workout</string>
-    <string name="app_page2">History</string>
+    <string name="app_page1"> Workout</string>
+    <string name="app_page2"> History</string>
     <string name="item_subtitle">Total Max RPM:</string>
     <string name="item_avgtitle">Average:</string>
-    <string name="app_page3">Profile</string>
-    <string name="app_page4">LeaderBoard</string>
+    <string name="app_page3"> Profile</string>
+    <string name="app_page4"> LeaderBoard</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_clear">Clear Data</string>
@@ -30,8 +30,15 @@
     <string name="Design_Total">/CollageAPI.ashx?action=load_publish_total</string>
     <string name="Req_PostAPI">/UCAPI.ashx</string>
     <string name="Param_Login">username =%1$s&amp;Password =%2$s</string>
+    <string name="Param_Signup">username =%1$s&amp;user =%2$s&amp;Password =%3$s</string>
     <string name="calory">Calories Today</string>
     <string name="login">LOG IN</string>
+    <string name="logout">LOG OUT</string>
+    <string name="gender">Gender</string>
+    <string name="birthday">Birthday</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="units">Units of Measure</string>
     <string name="title_activity_login">Sign in</string>
 
     <string name="signup_term"><a href="http://www.baidu.com">Terms of Use</a> and <a href="http://www.google.ca">Privacy Policy</a></string>

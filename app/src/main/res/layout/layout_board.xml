@@ -18,7 +18,8 @@
             android:layout_marginTop="5dp"
             android:text="@string/calory"
             android:id="@+id/textView5"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textColor="@color/black" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,7 +28,8 @@
             android:text="230"
             android:id="@+id/text_calory"
             android:textSize="42dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -40,7 +42,8 @@
         <ListView
             android:id="@+id/list_leading"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:headerDividersEnabled="false">
         </ListView>
     </android.support.v4.widget.SwipeRefreshLayout>
 

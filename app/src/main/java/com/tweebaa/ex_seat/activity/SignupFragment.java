@@ -243,11 +243,11 @@ public class SignupFragment extends Fragment implements LoaderManager.LoaderCall
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
-                /*String _reqURL = getResources().getString(R.string.Req_URL)+getResources().getString(R.string.Req_PostAPI);
-                String _postParams = String.format(getResources().getString(R.string.Param_Login)
-                        ,mEmail.toString(),mPassword.toString());
+                String _reqURL = getResources().getString(R.string.Req_URL)+getResources().getString(R.string.Req_PostAPI);
+                String _postParams = String.format(getResources().getString(R.string.Param_Signup)
+                        ,mEmail.toString(),mUsername.toString(),mPassword.toString());
 
-                HttpConnect ht = new HttpConnect();
+                /*HttpConnect ht = new HttpConnect();
                 String rR = ht.postXMLData(_reqURL, _postParams);
                 int nR;
                 try{

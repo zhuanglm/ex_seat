@@ -501,6 +501,8 @@ public class MainActivity extends AppCompatActivity {
           	m_bBTStartFlag = true;
          }
 	}
+
+
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -604,12 +606,7 @@ public class MainActivity extends AppCompatActivity {
         normalDia.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				handler.removeCallbacks(runnable_short);
-				handler.removeCallbacks(runnable_long);
-
-				db.close();
-				System.exit(0);
+				finish();
 				//Toast.makeText(getApplicationContext(),"确定",Toast.LENGTH_SHORT).show();
 			}
 		});
@@ -639,5 +636,18 @@ public class MainActivity extends AppCompatActivity {
 
 		// Logs 'app deactivate' App Event.
 		AppEventsLogger.deactivateApp(this);
+	}
+
+	@Override
+	protected void onDestroy(){
+		super.onDestroy();
+
+		handler.removeCallbacks(runnable_short);
+		handler.removeCallbacks(runnable_long);
+
+		db.close();
+		android.os.Process.killProcess(android.os.Process.myPid());
+		System.exit(0);
+
 	}
 }
