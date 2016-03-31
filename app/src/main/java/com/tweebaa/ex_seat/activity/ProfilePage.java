@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.tweebaa.ex_seat.R;
@@ -51,8 +52,10 @@ public class ProfilePage extends Fragment {
         View view = inflater.inflate(R.layout.layout_profile, container, false);
 
         text_username = (TextView) view.findViewById(R.id.text_username);
-        final TextView text_email = (TextView) view.findViewById(R.id.textEmail);
-        final TextView text_city = (TextView) view.findViewById(R.id.textLocation);
+        final TextView text_email = (TextView) view.findViewById(R.id.textEmail_Value);
+        final TextView text_city = (TextView) view.findViewById(R.id.textCity_Value);
+        final TextView text_birthday = (TextView) view.findViewById(R.id.birthday_Value);
+        final Switch  switch_gender = (Switch) view.findViewById(R.id.switch_gender);
 
         if(DataUtil.accessToken != null) {
             //text_username.setText(DataDef.profile.getName());
@@ -70,6 +73,7 @@ public class ProfilePage extends Fragment {
                                 String name = me.optString("name");
                                 String id = me.optString("id");
                                 String birthday = me.optString("birthday");
+                                String gender = me.optString("gender");
 
                                 try{
                                     String location = me.getJSONObject("location").optString("name");
@@ -77,8 +81,13 @@ public class ProfilePage extends Fragment {
                                 }catch (JSONException e) {
                                     e.printStackTrace();
                                 }
+                                if(gender.equals("male"))
+                                    switch_gender.setChecked(false);
+                                else
+                                    switch_gender.setChecked(true);
                                 text_username.setText(name);
                                 text_email.setText(email);
+                                text_birthday.setText(birthday);
                                 profilePictureView.setProfileId(id);
                             }
                         }

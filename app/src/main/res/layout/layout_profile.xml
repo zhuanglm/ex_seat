@@ -85,7 +85,20 @@
                     android:textSize="18dp"
                     android:textColor="@android:color/black"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/textEmail_Value"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18dp"
+                    android:textColor="@color/royalblue"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <LinearLayout
@@ -103,6 +116,18 @@
                     android:textColor="@android:color/black"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/textCity_Value"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18dp"
+                    android:textColor="@color/royalblue"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
@@ -126,13 +151,13 @@
                 <Switch
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:id="@+id/switch_gender"
                     android:layout_gravity="center_vertical|right"
                     android:layout_weight="1"
-                    android:textOff="Male"
-                    android:textOn="Female"
-                    android:showText="true" />
+                    android:textOff="M"
+                    android:textOn="F"
+                    android:showText="true"
+                    android:contextClickable="false" />
             </LinearLayout>
 
             <LinearLayout
@@ -150,6 +175,18 @@
                     android:textColor="@android:color/black"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/birthday_Value"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18dp"
+                    android:textColor="@color/royalblue"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <LinearLayout
